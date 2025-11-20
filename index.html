@@ -3,34 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Интерактивная карта - Kingdom Come Deliverance 2</title>
-    <link rel="stylesheet" href="scripts\style.css">
+    <title>Интерактивная карта Kingdom Come: Deliverance 2</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="scripts/style.css">
 </head>
 <body>
-    <div id="map-container">
-        <div id="map"></div>
-        <div id="controls">
-            <button id="add-marker-btn">Добавить маркер</button>
-            <button id="clear-markers-btn">Очистить маркеры</button>
-            <button id="toggle-grid-btn">Сетка координат</button>
-        </div>
-        <div id="marker-form" class="hidden">
-            <h3>Добавить маркер</h3>
-            <input type="text" id="marker-title" placeholder="Название маркера">
-            <textarea id="marker-description" placeholder="Описание"></textarea>
-            <div>
-                <button id="save-marker">Сохранить</button>
-                <button id="cancel-marker">Отмена</button>
-            </div>
-        </div>
-        <div id="marker-info" class="hidden">
-            <h3 id="info-title"></h3>
-            <p id="info-description"></p>
-            <button id="close-info">Закрыть</button>
-            <button id="delete-marker">Удалить</button>
-        </div>
-        <div id="coordinates">X: 0, Y: 0</div>
-    </div>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="scripts/script.js"></script>
 </body>
 </html>
