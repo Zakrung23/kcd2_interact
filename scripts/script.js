@@ -1,34 +1,32 @@
-// Инициализация карты
+//карта
 const map = L.map('map', {
     minZoom: -1,
     maxZoom: 3,
     crs: L.CRS.Simple
 });
 
-// Размеры изображения карты в пикселях
+// размеры изображения
 const mapWidth = 12288;
 const mapHeight = 10240;
 
-// Рассчитываем границы карты в координатах CRS.Simple
-const southWest = map.unproject([0, mapHeight], map.getMaxZoom()-1);
-const northEast = map.unproject([mapWidth, 0], map.getMaxZoom()-1);
+const southWest = map.unproject([0, mapHeight], map.getMaxZoom() - 1);
+const northEast = map.unproject([mapWidth, 0], map.getMaxZoom() - 1);
 const bounds = new L.LatLngBounds(southWest, northEast);
 
-// Устанавливаем максимальные границы
+// максимальные границы
 map.setMaxBounds(bounds);
-// Устанавливаем "липкость" границ (1.0 - полностью липкие, 0.0 - нет)
 map.options.maxBoundsViscosity = 1.0;
 
-// Добавляем изображение карты
+// изображение карты
 L.imageOverlay('assets/maps/kuttenberg.jpeg', bounds).addTo(map);
 
-// Устанавливаем начальный вид карты в центр
+// вид центр
 map.fitBounds(bounds);
 
-// Функция для легкого добавления маркеров
+// добавление маркеров
 function addMarker(pixelX, pixelY, title, description, iconUrl = null) {
-    const coordinates = map.unproject([pixelX, pixelY], map.getMaxZoom()-1);
-    
+    const coordinates = map.unproject([pixelX, pixelY], map.getMaxZoom() - 1);
+
     let markerOptions = {};
     if (iconUrl) {
         markerOptions.icon = L.icon({
@@ -38,7 +36,7 @@ function addMarker(pixelX, pixelY, title, description, iconUrl = null) {
             popupAnchor: [0, -32]
         });
     }
-    
+
     const marker = L.marker(coordinates, markerOptions)
         .addTo(map)
         .bindPopup(`
@@ -47,20 +45,20 @@ function addMarker(pixelX, pixelY, title, description, iconUrl = null) {
                 <p>${description}</p>
             </div>
         `);
-    
+
     return marker;
 }
 
-// Создаем элемент для отображения координат
-const coordDisplay = L.control({position: 'bottomleft'});
+// координаты
+const coordDisplay = L.control({ position: 'bottomleft' });
 
-coordDisplay.onAdd = function(map) {
+coordDisplay.onAdd = function (map) {
     this._div = L.DomUtil.create('div', 'coord-display');
     this.update([0, 0]);
     return this._div;
 };
 
-coordDisplay.update = function(coords) {
+coordDisplay.update = function (coords) {
     this._div.innerHTML = `
         <div style="
             background: white;
@@ -77,15 +75,35 @@ coordDisplay.update = function(coords) {
 
 coordDisplay.addTo(map);
 
-// Обновляем координаты при движении курсора
-map.on('mousemove', function(e) {
-    const pixelCoords = map.project(e.latlng, map.getMaxZoom()-1);
+map.on('mousemove', function (e) {
+    const pixelCoords = map.project(e.latlng, map.getMaxZoom() - 1);
     const x = Math.round(pixelCoords.x);
     const y = Math.round(pixelCoords.y);
     coordDisplay.update([x, y]);
 });
 
-// Примеры использования:
-addMarker(1500, 2500, "Троски", "Стартовый регион игры");
-addMarker(8500, 4200, "Куттенберг", "Столица серебряных рудников");
-addMarker(4500, 3200, "Табор", "Лагерь гуситов");
+//Маркеры
+//Лагеря
+addMarker(4459, 3694, "Лагерь Сигизмунда", "Военный лагерь короля Сигизмунда под Куттенбергом");
+//Поселения
+addMarker(9670, 4462, "Куттенберг", "Столица Богемии, также называемая столицей серебряных рудников");
+addMarker(2144, 4466, "Сухдол", "Поселение с небольшой крепостью на западе карты");
+addMarker(2818, 2142, "Раборш", "Небольшая деревня с крепостью");
+addMarker(3978, 2098, "Богуновиц", "Небольшая деревня");
+addMarker(4460, 2946, "Опатовиц", "Небольшая деревня у лагеря Сигизмунда");
+addMarker(6072, 2392, "Хоршан", "Небольшая деревня у Логова черта");
+addMarker(7608, 2032, "Грунд", "Деревня горняков");
+addMarker(6894, 4032, "Пщитоки", "Небольшая деревня");
+addMarker(5490, 4958, "Мисковиц", "Небольшая деревня с прудом, известная подпольными боями");
+addMarker(7162, 6092, "Билани", "Небольшая деревня");
+addMarker(6416, 8972, "Малешов", "Деревня с крепостью пана Отто Бергова");
+addMarker(3072, 5908, "Bисока", "Небольшая деревня");
+//Квесты основные
+addMarker(2252, 4272, "Помяни Черта", "Отправиться на поиски Черта вместе с Жижкой");
+addMarker(2246, 4080, "Пером и мечом", "Доложить Маркграфу Йобсту о событиях в Тросках");
+addMarker(2244, 4130, "Последние обряды", "Отразить атаку на крепость");
+addMarker(6109, 1495, "Чертовая стая", "Привести членов банды Черта в Логово черта");
+addMarker(6131, 1486, "В подземелье", "Узнать информацию о Лихтенштейне от Катерины");
+//Квесты побочные
+
+//Просьбы
