@@ -29,7 +29,10 @@ const markers = {
     'Поселения': [],
     'Основные квесты': [],
     'Побочные квесты': [],
-    'Просьбы': []
+    'Просьбы': [],
+    'Оружейные лавки': [],
+    'Кузницы': [],
+    'Тавереы': []
 };
 
 // Иконки для каждой категории
@@ -181,6 +184,27 @@ function createFilterPanel() {
                             <img src="assets/icons/palm.png" alt="Просьбы" class="filter-icon"> Просьбы
                         </span>
                         <span class="category-count" data-category="Просьбы">0</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" class="filter-checkbox" value="Таверны" checked>
+                        <span class="filter-label">
+                            <img src="assets/icons/palm.png" alt="Таверны" class="filter-icon"> Таверны
+                        </span>
+                        <span class="category-count" data-category="Таверны">0</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" class="filter-checkbox" value="Кузницы" checked>
+                        <span class="filter-label">
+                            <img src="assets/icons/palm.png" alt="Кузницы" class="filter-icon"> Кузницы
+                        </span>
+                        <span class="category-count" data-category="Кузницы">0</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" class="filter-checkbox" value="Оружейная лавка" checked>
+                        <span class="filter-label">
+                            <img src="assets/icons/palm.png" alt="Оружейные лавки" class="filter-icon"> Оружейные лавки
+                        </span>
+                        <span class="category-count" data-category="Оружейные лавки">0</span>
                     </label>
                 </div>
                 <div class="filter-buttons">

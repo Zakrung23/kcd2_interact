@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Cinzel:wght@400;600&family=Uncial+Antiqua&family=Ruslan+Display&display=swap');
-
 @font-face {
     font-family: 'Kereru Bold Italic';
     src: url('../assets/fonts/Kereru Bold Italic.otf') format('opentype');
@@ -30,21 +28,23 @@ body {
     height: 100vh;
 }
 
-/* Стили для панели фильтров */
+/* Стили для панели фильтров - ОПТИМИЗИРОВАНО */
 .filter-panel {
     position: relative;
     background: var(--panel-bg);
-    padding: 20px 20px 22px;
+    padding: 16px 16px 18px;
     border-radius: 16px;
     border: 1.5px solid var(--panel-border);
     color: #3d2a10;
-    width: 320px;
-    min-height: 640px;
+    width: 300px; /* Уменьшили ширину */
+    height: 85vh; /* Увеличили высоту */
+    max-height: 90vh; /* Максимальная высота - почти весь экран */
+    min-height: 400px; /* Минимальная высота */
     box-shadow: var(--shadow-soft);
-    overflow: visible; /* Изменено на visible для отображения кнопки сбоку */
+    overflow: visible;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px; /* Уменьшили промежутки */
     font-family: 'Kereru Bold Italic', 'Uncial Antiqua', 'Ruslan Display', 'Cinzel', 'Inter', serif;
     opacity: 1;
     transform: translateX(0);
@@ -67,11 +67,11 @@ body {
 }
 
 .filter-panel.is-hidden {
-    width: 64px;
-    min-width: 64px;
-    min-height: 64px;
-    height: 64px;
-    max-height: 64px;
+    width: 60px; /* Уменьшили */
+    min-width: 60px;
+    min-height: 60px;
+    height: 60px;
+    max-height: 60px;
     padding: 4px;
     opacity: 1;
     transform: translateX(12px);
@@ -87,14 +87,14 @@ body {
     z-index: 1;
 }
 
-/* Кнопка свернуть/развернуть в левой части панели */
+/* Кнопка свернуть/развернуть */
 .filter-toggle-left {
     position: absolute;
     top: 50%;
-    left: -52px; /* Располагаем слева от панели */
+    left: -48px; /* Подвинули ближе */
     transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
+    width: 40px; /* Уменьшили */
+    height: 40px;
     background: linear-gradient(145deg, #e5d2aa 0%, #d5c093 100%);
     border-radius: 10px;
     border: 1.5px solid rgba(88,56,16,0.55);
@@ -106,7 +106,7 @@ body {
     transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
     z-index: 2;
     color: #3d2a10;
-    font-size: 20px;
+    font-size: 18px; /* Уменьшили */
     font-family: 'Kereru Bold Italic', 'Uncial Antiqua', 'Ruslan Display', 'Cinzel', 'Inter', serif;
     line-height: 1;
 }
@@ -117,17 +117,14 @@ body {
     transform: translateY(-50%) scale(1.05);
 }
 
-/* Стрелка для развернутого состояния */
 .filter-panel:not(.collapsed) .filter-toggle-left::before {
     content: '‹';
 }
 
-/* Стрелка для свернутого состояния */
 .filter-panel.collapsed .filter-toggle-left::before {
     content: '›';
 }
 
-/* Удаляем старый стрелочный элемент справа */
 .filter-toggle-arrow {
     display: none;
 }
@@ -137,17 +134,19 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 10px; /* Уменьшили */
+    overflow: hidden;
+    min-height: 0;
 }
 
 /* Стили для свернутой панели */
 .filter-panel.collapsed {
-    width: 50px;
-    min-width: 50px;
-    min-height: 50px;
-    height: 50px;
-    max-height: 50px;
-    padding: 6px;
+    width: 45px; /* Уменьшили */
+    min-width: 45px;
+    min-height: 45px;
+    height: 45px;
+    max-height: 45px;
+    padding: 5px;
     overflow: hidden;
 }
 
@@ -160,12 +159,11 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 38px;
-    height: 38px;
+    width: 34px; /* Уменьшили */
+    height: 34px;
     box-shadow: 0 6px 12px rgba(34, 19, 8, 0.32), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
-/* Скрытая панель */
 .filter-panel.is-hidden .filter-toggle-left {
     display: none;
 }
@@ -174,47 +172,48 @@ body {
     display: none;
 }
 
-/* Подзаголовок над кнопками фильтров */
+/* Подзаголовок - УМЕНЬШИЛИ */
 .filter-subtitle-main {
-    margin-top: 6px;
-    margin-bottom: 10px;
-    padding: 6px 10px 0;
-    font-size: 18px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    padding: 4px 8px 0;
+    font-size: 15px; /* Уменьшили */
     color: #4a3118;
     text-align: center;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.4px;
+    line-height: 1.3;
 }
 
 /* Подпись внизу панели */
 .filter-footer-powered {
     margin-top: auto;
-    padding-top: 10px;
+    padding-top: 8px; /* Уменьшили */
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
+    font-size: 10px; /* Уменьшили */
     color: rgba(0,0,0,0.6);
     text-align: center;
 }
 
-/* Логотип игры над панелью */
+/* Логотип игры - УМЕНЬШИЛИ */
 .filter-logo {
     width: 100%;
-    height: 120px;
+    height: 100px; /* Уменьшили */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-image:
         linear-gradient(145deg, rgba(26, 17, 6, 0.35), rgba(180, 142, 90, 0.2)),
         url('../assets/logo.jpg');
-    border-radius: 12px;
+    border-radius: 10px; /* Уменьшили */
     border: 1px dashed rgba(88,56,16,0.35);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--panel-muted);
-    font-size: 14px;
-    letter-spacing: 0.5px;
+    font-size: 13px; /* Уменьшили */
+    letter-spacing: 0.4px;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px; /* Уменьшили */
     overflow: hidden;
 }
 
@@ -222,7 +221,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 10px;
+    border-radius: 8px; /* Уменьшили */
 }
 
 .filter-logo::after {
@@ -233,22 +232,23 @@ body {
     pointer-events: none;
 }
 
+/* Заголовок - УМЕНЬШИЛИ */
 .filter-header {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 6px; /* Уменьшили */
 }
 
 .filter-header h3 {
     margin: 0;
     color: #3d2a10;
-    font-size: 24px;
+    font-size: 20px; /* Уменьшили */
     border-bottom: 2px solid var(--panel-highlight);
-    padding-bottom: 8px;
+    padding-bottom: 6px; /* Уменьшили */
     flex-grow: 1;
-    font-family: 'Kereru Bold Italic', 'Uncial Antiqua', 'Ruslan Display', serif; /* готический стиль для русского текста */
-    letter-spacing: 0.5px;
+    font-family: 'Kereru Bold Italic', 'Uncial Antiqua', 'Ruslan Display', serif;
+    letter-spacing: 0.4px;
     text-align: center;
 }
 
@@ -299,37 +299,69 @@ body {
     filter: brightness(1.05);
 }
 
+/* Основной контент с прокруткой */
 .filter-content {
-    transition: all 0.3s ease;
     background: rgba(255,255,255,0.24);
     border: 1px solid rgba(88,56,16,0.18);
-    border-radius: 12px;
-    padding: 12px;
+    border-radius: 10px; /* Уменьшили */
+    padding: 10px; /* Уменьшили */
     backdrop-filter: blur(2px);
-}
-
-.filter-list {
-    margin-bottom: 12px;
+    flex: 1;
+    min-height: 0;
     display: flex;
     flex-direction: column;
-    gap: 4px;
 }
 
+/* Список фильтров с прокруткой - ОПТИМИЗИРОВАНО */
+.filter-list {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-bottom: 10px; /* Уменьшили */
+    display: flex;
+    flex-direction: column;
+    gap: 3px; /* Уменьшили до минимума */
+    padding-right: 4px;
+    min-height: 0;
+    max-height: 500px; /* Увеличили для большего количества категорий */
+}
+
+/* Стили для скроллбара в списке фильтров */
+.filter-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.filter-list::-webkit-scrollbar-track {
+    background: rgba(88,56,16,0.08);
+    border-radius: 10px;
+}
+
+.filter-list::-webkit-scrollbar-thumb {
+    background: rgba(176,141,87,0.5);
+    border-radius: 10px;
+}
+
+.filter-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(176,141,87,0.7);
+}
+
+/* Элементы фильтров - КОМПАКТНЫЕ */
 .filter-panel label {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 4px;
+    margin-bottom: 2px; /* Уменьшили */
     cursor: pointer;
-    font-size: 15px;
+    font-size: 14px; /* Уменьшили */
     color: #5a3c1f;
-    padding: 4px 4px;
+    padding: 3px 4px; /* Уменьшили */
     border-radius: 0;
     transition: color 0.15s ease, opacity 0.15s ease;
     background: transparent;
     border: none;
     font-variant: small-caps;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.4px; /* Уменьшили */
+    min-height: 28px; /* Фиксированная минимальная высота */
 }
 
 .filter-panel label:hover {
@@ -344,22 +376,25 @@ body {
 
 .filter-label {
     flex-grow: 1;
-    margin-right: 6px;
+    margin-right: 4px; /* Уменьшили */
+    display: flex;
+    align-items: center;
+    padding: 2px 0; /* Уменьшили */
 }
 
 .category-count {
-    min-width: 32px;
-    padding: 2px 6px;
-    margin-left: 6px;
-    border-radius: 10px;
+    min-width: 28px; /* Уменьшили */
+    padding: 1px 5px; /* Уменьшили */
+    margin-left: 4px; /* Уменьшили */
+    border-radius: 8px; /* Уменьшили */
     background: rgba(88,56,16,0.06);
     border: 1px solid rgba(88,56,16,0.18);
     color: #5a3c1f;
-    font-size: 12px;
+    font-size: 11px; /* Уменьшили */
     text-align: right;
+    flex-shrink: 0;
 }
 
-/* Активное/неактивное состояние категорий по чекбоксу */
 .filter-checkbox:checked ~ .filter-label {
     color: #2f1f0f;
 }
@@ -374,29 +409,36 @@ body {
     opacity: 0.7;
 }
 
+/* МАЛЕНЬКИЕ КНОПКИ - ОСНОВНОЕ ИЗМЕНЕНИЕ */
 .filter-buttons {
     display: flex;
-    gap: 8px;
-    margin-top: 20px;
+    gap: 6px; /* Уменьшили */
+    margin-top: auto;
+    padding-top: 8px; /* Уменьшили */
+    flex-shrink: 0;
 }
 
 .filter-button {
     flex: 1;
-    padding: 10px 14px;
+    padding: 6px 10px; /* Уменьшили значительно */
     background-image: var(--btn-primary);
     color: #f8f3e8;
     border: none;
-    border-radius: 12px;
+    border-radius: 8px; /* Уменьшили */
     cursor: pointer;
-    font-size: 16px;
+    font-size: 13px; /* Уменьшили */
     font-family: 'Helmswald', 'Uncial Antiqua', 'Ruslan Display', 'Cinzel', 'Inter', serif;
     transition: all 0.2s;
-    box-shadow: 0 10px 25px rgba(73, 44, 15, 0.28);
+    box-shadow: 0 8px 20px rgba(73, 44, 15, 0.28); /* Уменьшили */
+    min-height: 32px; /* Фиксированная высота */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .filter-button:hover {
-    transform: translateY(-2px) scale(1.01);
-    box-shadow: 0 12px 30px rgba(73, 44, 15, 0.32);
+    transform: translateY(-1px) scale(1.01); /* Уменьшили эффект */
+    box-shadow: 0 10px 22px rgba(73, 44, 15, 0.32); /* Уменьшили */
 }
 
 .filter-button#hide-all {
@@ -405,50 +447,69 @@ body {
 }
 
 .filter-button#hide-all:hover {
-    transform: translateY(-2px) scale(1.01);
-    box-shadow: 0 12px 30px rgba(124, 43, 32, 0.35);
+    transform: translateY(-1px) scale(1.01); /* Уменьшили эффект */
+    box-shadow: 0 10px 22px rgba(124, 43, 32, 0.35); /* Уменьшили */
 }
 
-/* Отключаем анимации вложенных элементов только в свернутом состоянии, чтобы иконки не меняли размер */
+/* Иконки фильтров - УМЕНЬШИЛИ */
+.filter-icon {
+    width: 18px; /* Уменьшили */
+    height: 18px;
+    vertical-align: middle;
+    margin-right: 6px; /* Уменьшили */
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.filter-label:hover .filter-icon {
+    transform: scale(1.05); /* Уменьшили эффект */
+}
+
+.filter-checkbox:checked + .filter-label .filter-icon {
+    opacity: 1;
+}
+
+.filter-checkbox:not(:checked) + .filter-label .filter-icon {
+    opacity: 0.5;
+}
+
+/* Отключаем анимации в свернутом состоянии */
 .filter-panel.collapsed * {
     transition: none !important;
 }
 
-/* Удаляем старые стили для кнопки сворачивания */
-.filter-collapse-control {
-    display: none;
-}
-
+.filter-collapse-control,
 .collapse-panel-btn {
     display: none;
 }
 
 #toggle-filter-panel-btn {
-    padding: 10px 14px;
+    padding: 8px 12px; /* Уменьшили */
     background: linear-gradient(135deg, #7b542c 0%, #5a3c1f 60%, #8c6239 100%);
     color: #f8f1e3;
     border: 1.25px solid rgba(43, 26, 10, 0.55);
-    border-radius: 10px;
+    border-radius: 8px; /* Уменьшили */
     cursor: pointer;
-    font-size: 14px;
-    letter-spacing: 0.6px;
+    font-size: 13px; /* Уменьшили */
+    letter-spacing: 0.5px; /* Уменьшили */
     font-family: 'Kereru Bold Italic', 'Uncial Antiqua', 'Ruslan Display', 'Cinzel', 'Inter', serif;
-    box-shadow: 0 7px 16px rgba(43,26,10,0.32), inset 0 1px 0 rgba(255,255,255,0.12);
+    box-shadow: 0 6px 14px rgba(43,26,10,0.32), inset 0 1px 0 rgba(255,255,255,0.12); /* Уменьшили */
     transition: all 0.28s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px; /* Уменьшили */
 }
 
 #toggle-filter-panel-btn:hover {
     filter: brightness(1.03);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(43,26,10,0.36), inset 0 1px 0 rgba(255,255,255,0.18);
+    transform: translateY(-1px); /* Уменьшили эффект */
+    box-shadow: 0 8px 18px rgba(43,26,10,0.36), inset 0 1px 0 rgba(255,255,255,0.18); /* Уменьшили */
 }
 
 .btn-icon {
-    font-size: 16px;
+    font-size: 14px; /* Уменьшили */
 }
 
 /* Стили для отображения координат */
@@ -564,44 +625,56 @@ body {
     background: #2a7ae0;
 }
 
+/* Для свернутой панели скрываем прокрутку */
+.filter-panel.collapsed .filter-content-wrapper,
+.filter-panel.collapsed .filter-list {
+    overflow: visible;
+}
+
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
     .filter-panel {
-        min-width: 180px;
+        min-width: 160px; /* Уменьшили */
         padding: 10px;
+        height: 75vh;
+        max-height: 500px;
+        min-height: 200px;
+        width: 260px; /* Уменьшили */
     }
     
     .filter-panel.collapsed {
-        min-width: 35px;
-        width: 35px;
-        padding: 8px;
+        min-width: 30px; /* Уменьшили */
+        width: 30px;
+        padding: 5px;
     }
     
     .filter-toggle-left {
-        left: -42px;
-        width: 36px;
-        height: 36px;
-        font-size: 16px;
+        left: -38px; /* Подвинули ближе */
+        width: 32px; /* Уменьшили */
+        height: 32px;
+        font-size: 14px; /* Уменьшили */
     }
     
     .filter-panel.collapsed .filter-toggle-left {
-        width: 32px;
-        height: 32px;
-        font-size: 14px;
+        width: 28px; /* Уменьшили */
+        height: 28px;
+        font-size: 12px; /* Уменьшили */
     }
     
     .filter-header h3 {
-        font-size: 14px;
+        font-size: 16px; /* Уменьшили */
     }
     
     .filter-panel label {
-        font-size: 13px;
-        margin-bottom: 6px;
+        font-size: 12px; /* Уменьшили */
+        margin-bottom: 2px;
+        min-height: 24px; /* Уменьшили */
     }
     
     .filter-button {
-        padding: 6px 10px;
-        font-size: 12px;
+        padding: 5px 8px; /* Уменьшили */
+        font-size: 12px; /* Уменьшили */
+        min-height: 28px; /* Уменьшили */
     }
     
     .coord-display div {
@@ -610,8 +683,31 @@ body {
     }
     
     #toggle-filter-panel-btn {
-        padding: 8px 12px;
-        font-size: 12px;
+        padding: 6px 10px; /* Уменьшили */
+        font-size: 12px; /* Уменьшили */
+    }
+    
+    .filter-list {
+        max-height: 350px; /* Уменьшили для мобильных */
+    }
+    
+    .filter-subtitle-main {
+        font-size: 13px; /* Уменьшили */
+    }
+    
+    .filter-logo {
+        height: 80px; /* Уменьшили */
+    }
+    
+    .filter-icon {
+        width: 16px; /* Уменьшили */
+        height: 16px;
+        margin-right: 4px; /* Уменьшили */
+    }
+    
+    .category-count {
+        min-width: 24px; /* Уменьшили */
+        font-size: 10px; /* Уменьшили */
     }
 }
 
@@ -652,32 +748,3 @@ body {
     background-repeat: no-repeat;
     background-position: center;
 }
-
-.filter-icon {
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-    margin-right: 8px;
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
-    transition: transform 0.2s ease;
-}
-
-.filter-label:hover .filter-icon {
-    transform: scale(1.1);
-}
-
-/* Для лучшего выравнивания текста с иконками */
-.filter-label {
-    display: flex;
-    align-items: center;
-    padding: 4px 0;
-}
-
-.filter-checkbox:checked + .filter-label .filter-icon {
-    opacity: 1;
-}
-
-.filter-checkbox:not(:checked) + .filter-label .filter-icon {
-    opacity: 0.5;
-}
-
