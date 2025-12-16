@@ -62,17 +62,22 @@ ________________________________________________________________________________
 
 Для открытия панели паркеров нужно нажать на данную кнопку
 
+<p align = "center" width = 100%>
 <img width="82" height="81" alt="изображение" src="https://github.com/user-attachments/assets/f3a34477-103c-4aaa-854e-abf413ee5b18" />
+</p>
 
 Далее откроется данное меню
 
+<p align = "center" width = 100%>
 <img width="339" height="850" alt="изображение" src="https://github.com/user-attachments/assets/0d4d6e23-b00f-4692-a0ef-8879b1ad59dd" />
-
+</p>
 
 Для скрытия/появления маркеров нужно нажать на название маркера
 
 Чтобы свернуть меню нужно нажать на данную кнопку с правой стороны меню
 
+<p align = "center" width = 100%>
 <img width="58" height="60" alt="изображение" src="https://github.com/user-attachments/assets/74077de1-d1c9-4a28-ac93-279912923325" />
+</p>
 
 Приятного пользования!
