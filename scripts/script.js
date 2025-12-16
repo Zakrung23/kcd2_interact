@@ -1,4 +1,4 @@
-//карта
+///карта
 const map = L.map('map', {
     minZoom: -1,
     maxZoom: 3,
@@ -34,8 +34,8 @@ const markers = {
 
 // Иконки для каждой категории
 const categoryIcons = {
-    'Лагеря': 'assets/icons/camp.png',
-    'Поселения': 'assets/icons/village.png',
+    'Лагеря': 'assets/icons/swords.svg',
+    'Поселения': 'assets/icons/castle.svg',
     'Основные квесты': 'assets/icons/main_quest.png',
     'Побочные квесты': 'assets/icons/side_quest.png',
     'Просьбы': 'assets/icons/request.png',
@@ -45,7 +45,7 @@ const categoryIcons = {
 // Переменные для управления панелью фильтров
 let filterPanelControl = null;
 let isFilterPanelVisible = true;
-let filterPanelState = 'expanded'; // 'expanded', 'collapsed', 'hidden'
+let filterPanelState = 'expanded'; // 'expanded', 'collapsed'
 
 // Функция для добавления маркера
 function addMarker(pixelX, pixelY, title, description, category, customIconUrl = null) {
@@ -69,7 +69,10 @@ function addMarker(pixelX, pixelY, title, description, category, customIconUrl =
         .addTo(map)
         .bindPopup(`
             <div class="popup-content">
-                <h3>${title}</h3>
+                <div class="popup-title-row">
+                    <div class="popup-icon"></div>
+                    <h3>${title}</h3>
+                </div>
                 <p>${description}</p>
                 <small><em>Категория: ${category}</em></small>
             </div>
@@ -81,6 +84,11 @@ function addMarker(pixelX, pixelY, title, description, category, customIconUrl =
     } else {
         // Если категории нет, создаем ее
         markers[category] = [marker];
+    }
+    
+    // Обновляем счетчики категорий, если панель уже создана
+    if (typeof updateCategoryCounts === 'function') {
+        updateCategoryCounts();
     }
     
     return marker;
@@ -126,40 +134,51 @@ function createFilterPanel() {
     filterPanelControl.onAdd = function(map) {
         const div = L.DomUtil.create('div', 'filter-panel');
         div.innerHTML = `
-            <div class="filter-header">
-                <h3>Фильтры маркеров</h3>
-                <div class="filter-controls">
-                    <button class="filter-control-btn collapse-btn" title="Свернуть">−</button>
-                    <button class="filter-control-btn close-btn" title="Скрыть панель">×</button>
+            <!-- Кнопка свернуть/развернуть теперь в левой части -->
+            <div class="filter-toggle-left" title="Свернуть/Развернуть панель"></div>
+            
+            <div class="filter-content-wrapper">
+                <div class="filter-logo">
+                    <div class="logo-emblem"></div>
                 </div>
-            </div>
-            <div class="filter-content">
-                <div class="filter-list">
-                    <label>
-                        <input type="checkbox" class="filter-checkbox" value="Лагеря" checked>
-                        <span class="filter-label">Лагеря</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="filter-checkbox" value="Поселения" checked>
-                        <span class="filter-label">Поселения</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="filter-checkbox" value="Основные квесты" checked>
-                        <span class="filter-label">Основные квесты</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="filter-checkbox" value="Побочные квесты" checked>
-                        <span class="filter-label">Побочные квесты</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="filter-checkbox" value="Просьбы" checked>
-                        <span class="filter-label">Просьбы</span>
-                    </label>
+                <div class="filter-subtitle-main">Интерактивная карта Kingdom Come Deliverance 2</div>
+                <div class="filter-header">
+                    <h3>Фильтры маркеров</h3>
                 </div>
-                <div class="filter-buttons">
-                    <button class="filter-button" id="show-all">Показать все</button>
-                    <button class="filter-button" id="hide-all">Скрыть все</button>
+                <div class="filter-content">
+                    <div class="filter-list">
+                        <label>
+                            <input type="checkbox" class="filter-checkbox" value="Лагеря" checked>
+                            <span class="filter-label">🏕️ Лагеря</span>
+                            <span class="category-count" data-category="Лагеря">0</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" class="filter-checkbox" value="Поселения" checked>
+                            <span class="filter-label">🏘️ Поселения</span>
+                            <span class="category-count" data-category="Поселения">0</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" class="filter-checkbox" value="Основные квесты" checked>
+                            <span class="filter-label">⚔️ Основные квесты</span>
+                            <span class="category-count" data-category="Основные квесты">0</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" class="filter-checkbox" value="Побочные квесты" checked>
+                            <span class="filter-label">📜 Побочные квесты</span>
+                            <span class="category-count" data-category="Побочные квесты">0</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" class="filter-checkbox" value="Просьбы" checked>
+                            <span class="filter-label">🙏 Просьбы</span>
+                            <span class="category-count" data-category="Просьбы">0</span>
+                        </label>
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-button" id="show-all">Показать все</button>
+                        <button class="filter-button" id="hide-all">Скрыть все</button>
+                    </div>
                 </div>
+                <div class="filter-footer-powered">Powered by Bolvany</div>
             </div>
         `;
         
@@ -181,68 +200,25 @@ function createFilterPanel() {
             updateFilters();
         });
         
-        // Кнопка сворачивания
-        div.querySelector('.collapse-btn').addEventListener('click', () => {
-            if (filterPanelState === 'expanded') {
-                collapseFilterPanel();
-            } else {
-                expandFilterPanel();
-            }
-        });
+        updateCategoryCounts();
         
-        // Кнопка закрытия
-        div.querySelector('.close-btn').addEventListener('click', hideFilterPanel);
-        
+        // Обработчик для кнопки сворачивания в левой части
+        const toggleLeft = div.querySelector('.filter-toggle-left');
+        if (toggleLeft) {
+            toggleLeft.addEventListener('click', () => {
+                if (filterPanelState === 'expanded') {
+                    collapseFilterPanel();
+                } else {
+                    expandFilterPanel();
+                }
+            });
+        }
+
         return div;
     };
     
     filterPanelControl.addTo(map);
     updateFilterPanelAppearance();
-}
-
-// Функция для создания кнопки показа/скрытия панели
-function createFilterToggleButton() {
-    const filterToggleControl = L.control({ position: 'topleft' });
-    
-    filterToggleControl.onAdd = function(map) {
-        const div = L.DomUtil.create('div', 'filter-toggle-control');
-        div.innerHTML = `
-            <button class="control-button" id="toggle-filter-panel-btn">
-                <span class="btn-text">${isFilterPanelVisible ? 'Скрыть фильтры' : 'Показать фильтры'}</span>
-                <span class="btn-icon">${isFilterPanelVisible ? '👁‍🗨' : '👁'}</span>
-            </button>
-        `;
-        
-        div.querySelector('#toggle-filter-panel-btn').addEventListener('click', () => {
-            if (isFilterPanelVisible) {
-                hideFilterPanel();
-            } else {
-                showFilterPanel();
-            }
-            updateToggleButton();
-        });
-        
-        return div;
-    };
-    
-    filterToggleControl.addTo(map);
-}
-
-// Обновление кнопки переключения
-function updateToggleButton() {
-    const toggleBtn = document.querySelector('#toggle-filter-panel-btn');
-    if (toggleBtn) {
-        const btnText = toggleBtn.querySelector('.btn-text');
-        const btnIcon = toggleBtn.querySelector('.btn-icon');
-        
-        if (isFilterPanelVisible) {
-            btnText.textContent = 'Скрыть фильтры';
-            btnIcon.textContent = '👁‍🗨';
-        } else {
-            btnText.textContent = 'Показать фильтры';
-            btnIcon.textContent = '👁';
-        }
-    }
 }
 
 // Функция сворачивания панели
@@ -251,12 +227,6 @@ function collapseFilterPanel() {
     if (panel) {
         panel.classList.add('collapsed');
         filterPanelState = 'collapsed';
-        
-        const collapseBtn = panel.querySelector('.collapse-btn');
-        if (collapseBtn) {
-            collapseBtn.title = 'Развернуть';
-            collapseBtn.textContent = '+';
-        }
     }
 }
 
@@ -266,50 +236,40 @@ function expandFilterPanel() {
     if (panel) {
         panel.classList.remove('collapsed');
         filterPanelState = 'expanded';
-        
-        const collapseBtn = panel.querySelector('.collapse-btn');
-        if (collapseBtn) {
-            collapseBtn.title = 'Свернуть';
-            collapseBtn.textContent = '−';
-        }
     }
 }
 
 // Функция скрытия панели фильтров
 function hideFilterPanel() {
-    if (filterPanelControl && isFilterPanelVisible) {
-        // Сохраняем состояние свернутости перед скрытием
-        const panel = document.querySelector('.filter-panel');
-        const wasCollapsed = panel && panel.classList.contains('collapsed');
-        
-        // Удаляем панель с карты
-        map.removeControl(filterPanelControl);
-        filterPanelControl = null;
+    const panel = document.querySelector('.filter-panel');
+    if (panel && isFilterPanelVisible) {
+        const wasCollapsed = panel.classList.contains('collapsed');
+        panel.classList.add('is-hidden');
         isFilterPanelVisible = false;
-        
-        // Сохраняем состояние
         localStorage.setItem('filterPanelState', wasCollapsed ? 'collapsed' : 'expanded');
-        
-        updateToggleButton();
+        saveFilterPanelState();
     }
 }
 
 // Функция показа панели фильтров
 function showFilterPanel() {
-    if (!isFilterPanelVisible) {
+    const panel = document.querySelector('.filter-panel');
+    if (!panel) {
         createFilterPanel();
-        isFilterPanelVisible = true;
-        
-        // Восстанавливаем предыдущее состояние
-        const savedState = localStorage.getItem('filterPanelState') || 'expanded';
-        if (savedState === 'collapsed') {
-            setTimeout(() => {
-                collapseFilterPanel();
-            }, 10);
-        }
-        
-        updateToggleButton();
     }
+    const restoredPanel = document.querySelector('.filter-panel');
+    if (restoredPanel) {
+        restoredPanel.classList.remove('is-hidden');
+    }
+    isFilterPanelVisible = true;
+    const savedState = localStorage.getItem('filterPanelState') || 'expanded';
+    if (savedState === 'collapsed') {
+        setTimeout(() => collapseFilterPanel(), 10);
+    } else {
+        expandFilterPanel();
+    }
+    updateCategoryCounts();
+    saveFilterPanelState();
 }
 
 // Обновление внешнего вида панели
@@ -351,11 +311,8 @@ function loadFilterPanelState() {
     if (savedState) {
         filterPanelState = savedState;
     }
-    
-    const savedVisibility = localStorage.getItem('filterPanelVisible');
-    if (savedVisibility === 'false') {
-        isFilterPanelVisible = false;
-    }
+    // Панель всегда отображается при загрузке страницы
+    isFilterPanelVisible = true;
 }
 
 // Сохранение состояния панели
@@ -367,13 +324,21 @@ function saveFilterPanelState() {
 // Инициализация
 loadFilterPanelState();
 
-// Создаем панель фильтров, если она должна быть видима
-if (isFilterPanelVisible) {
-    createFilterPanel();
-}
+// Создаем панель фильтров (открыта по умолчанию)
+createFilterPanel();
 
-// Создаем кнопку переключения
-createFilterToggleButton();
+// Первичное обновление счетчиков после создания панели
+updateCategoryCounts();
+
+// Обновление счетчиков категорий
+function updateCategoryCounts() {
+    const countSpans = document.querySelectorAll('.category-count');
+    countSpans.forEach(span => {
+        const category = span.dataset.category;
+        const count = markers[category] ? markers[category].length : 0;
+        span.textContent = count;
+    });
+}
 
 // ============================
 // ДОБАВЛЕНИЕ МАРКЕРОВ

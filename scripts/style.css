@@ -1,7 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Cinzel:wght@400;600&family=Uncial+Antiqua&family=Ruslan+Display&display=swap');
+
+@font-face {
+    font-family: 'Kereru Bold Italic';
+    src: url('../assets/fonts/Kereru Bold Italic.otf') format('opentype');
+    font-display: swap;
+}
+
+:root {
+    --panel-bg: linear-gradient(145deg, #f5e6c8 0%, #e7d5ae 100%);
+    --panel-border: rgba(88, 56, 16, 0.35);
+    --panel-highlight: #b08d57;
+    --panel-muted: #6b5332;
+    --btn-primary: linear-gradient(135deg, #c49a6c 0%, #b27b44 100%);
+    --btn-danger: linear-gradient(135deg, #b2503b 0%, #7c2b20 100%);
+    --shadow-soft: 0 16px 48px rgba(46, 28, 9, 0.35);
+}
+
 body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: 'Kereru Bold Italic', 'Uncial Antiqua', 'Ruslan Display', 'Cinzel', 'Inter', serif;
+    background: radial-gradient(circle at 30% 25%, rgba(184, 151, 99, 0.12), transparent 36%),
+                radial-gradient(circle at 75% 10%, rgba(109, 79, 46, 0.12), transparent 38%),
+                #f0e0c0;
 }
 
 #map {
@@ -11,48 +32,242 @@ body {
 
 /* Стили для панели фильтров */
 .filter-panel {
-    background: wheat;
-    padding: 15px;
-    border-radius: 5px;
-    border:  solid rgba(0,0,0,0.2);
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    width: 300px;
-    height: 600px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
+    position: relative;
+    background: var(--panel-bg);
+    padding: 20px 20px 22px;
+    border-radius: 16px;
+    border: 1.5px solid var(--panel-border);
+    color: #3d2a10;
+    width: 320px;
+    min-height: 640px;
+    box-shadow: var(--shadow-soft);
+    overflow: visible; /* Изменено на visible для отображения кнопки сбоку */
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-family: 'Kereru Bold Italic', 'Uncial Antiqua', 'Ruslan Display', 'Cinzel', 'Inter', serif;
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.3s ease, background 0.3s ease, width 0.3s ease, height 0.3s ease, padding 0.3s ease;
+}
+
+.filter-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 35%),
+                radial-gradient(circle at 20% 20%, rgba(176,141,87,0.08), transparent 36%),
+                radial-gradient(circle at 80% 10%, rgba(99,69,36,0.08), transparent 34%);
+}
+
+.filter-panel:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 58px rgba(46, 28, 9, 0.45);
+}
+
+.filter-panel.is-hidden {
+    width: 64px;
+    min-width: 64px;
+    min-height: 64px;
+    height: 64px;
+    max-height: 64px;
+    padding: 4px;
+    opacity: 1;
+    transform: translateX(12px);
+    pointer-events: auto;
+    box-shadow: 0 10px 30px rgba(46, 28, 9, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-panel * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Кнопка свернуть/развернуть в левой части панели */
+.filter-toggle-left {
+    position: absolute;
+    top: 50%;
+    left: -52px; /* Располагаем слева от панели */
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(145deg, #e5d2aa 0%, #d5c093 100%);
+    border-radius: 10px;
+    border: 1.5px solid rgba(88,56,16,0.55);
+    box-shadow: 0 10px 18px rgba(34, 19, 8, 0.32), inset 0 1px 0 rgba(255,255,255,0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    z-index: 2;
+    color: #3d2a10;
+    font-size: 20px;
+    font-family: 'Kereru Bold Italic', 'Uncial Antiqua', 'Ruslan Display', 'Cinzel', 'Inter', serif;
+    line-height: 1;
+}
+
+.filter-toggle-left:hover {
+    filter: brightness(1.05);
+    box-shadow: 0 8px 16px rgba(34, 19, 8, 0.32), inset 0 1px 0 rgba(255,255,255,0.28);
+    transform: translateY(-50%) scale(1.05);
+}
+
+/* Стрелка для развернутого состояния */
+.filter-panel:not(.collapsed) .filter-toggle-left::before {
+    content: '‹';
+}
+
+/* Стрелка для свернутого состояния */
+.filter-panel.collapsed .filter-toggle-left::before {
+    content: '›';
+}
+
+/* Удаляем старый стрелочный элемент справа */
+.filter-toggle-arrow {
+    display: none;
+}
+
+/* Обертка для контента панели */
+.filter-content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Стили для свернутой панели */
+.filter-panel.collapsed {
+    width: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    height: 50px;
+    max-height: 50px;
+    padding: 6px;
+    overflow: hidden;
+}
+
+.filter-panel.collapsed .filter-content-wrapper {
+    display: none;
+}
+
+.filter-panel.collapsed .filter-toggle-left {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 38px;
+    height: 38px;
+    box-shadow: 0 6px 12px rgba(34, 19, 8, 0.32), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* Скрытая панель */
+.filter-panel.is-hidden .filter-toggle-left {
+    display: none;
+}
+
+.filter-panel.is-hidden .filter-content-wrapper {
+    display: none;
+}
+
+/* Подзаголовок над кнопками фильтров */
+.filter-subtitle-main {
+    margin-top: 6px;
+    margin-bottom: 10px;
+    padding: 6px 10px 0;
+    font-size: 18px;
+    color: #4a3118;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+/* Подпись внизу панели */
+.filter-footer-powered {
+    margin-top: auto;
+    padding-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: rgba(0,0,0,0.6);
+    text-align: center;
+}
+
+/* Логотип игры над панелью */
+.filter-logo {
+    width: 100%;
+    height: 120px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image:
+        linear-gradient(145deg, rgba(26, 17, 6, 0.35), rgba(180, 142, 90, 0.2)),
+        url('../assets/logo.jpg');
+    border-radius: 12px;
+    border: 1px dashed rgba(88,56,16,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--panel-muted);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+}
+
+.filter-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.filter-logo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1), transparent 45%);
+    pointer-events: none;
 }
 
 .filter-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .filter-header h3 {
     margin: 0;
-    color: #333;
-    font-size: 16px;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 5px;
+    color: #3d2a10;
+    font-size: 24px;
+    border-bottom: 2px solid var(--panel-highlight);
+    padding-bottom: 8px;
     flex-grow: 1;
+    font-family: 'Kereru Bold Italic', 'Uncial Antiqua', 'Ruslan Display', serif; /* готический стиль для русского текста */
+    letter-spacing: 0.5px;
+    text-align: center;
 }
 
 .filter-controls {
     display: flex;
-    gap: 5px;
-    margin-left: 10px;
+    gap: 8px;
+    margin-left: 0;
 }
 
 .filter-control-btn {
-    background: #7f8c8d;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    width: 24px;
-    height: 24px;
+    background: rgba(135, 99, 50, 0.12);
+    color: #3d2a10;
+    border: 1px solid rgba(88,56,16,0.25);
+    border-radius: 18px;
+    width: 34px;
+    height: 34px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
+    font-family: 'Kereru Bold Italic', 'Uncial Antiqua', 'Ruslan Display', 'Cinzel', 'Inter', serif;
     line-height: 20px;
     text-align: center;
     transition: background-color 0.2s;
@@ -62,130 +277,164 @@ body {
     justify-content: center;
 }
 
+.filter-control-btn.collapse-btn {
+    background: linear-gradient(145deg, #e5d2aa 0%, #d5c093 100%);
+    box-shadow: 0 4px 10px rgba(34,19,8,0.35), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+.filter-control-btn.collapse-btn:hover {
+    background: linear-gradient(145deg, #f0ddba 0%, #dec79b 100%);
+}
+
 .filter-control-btn:hover {
-    background: #636e72;
+    background: rgba(135, 99, 50, 0.22);
 }
 
 .filter-control-btn.close-btn {
-    background: #e74c3c;
+    background: var(--btn-danger);
+    color: #f8f3e8;
 }
 
 .filter-control-btn.close-btn:hover {
-    background: #c0392b;
+    filter: brightness(1.05);
 }
 
 .filter-content {
     transition: all 0.3s ease;
+    background: rgba(255,255,255,0.24);
+    border: 1px solid rgba(88,56,16,0.18);
+    border-radius: 12px;
+    padding: 12px;
+    backdrop-filter: blur(2px);
 }
 
 .filter-list {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .filter-panel label {
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
+    justify-content: space-between;
+    margin-bottom: 4px;
     cursor: pointer;
-    font-size: 14px;
-    color: #555;
-    padding: 5px;
-    border-radius: 3px;
-    transition: background-color 0.2s;
+    font-size: 15px;
+    color: #5a3c1f;
+    padding: 4px 4px;
+    border-radius: 0;
+    transition: color 0.15s ease, opacity 0.15s ease;
+    background: transparent;
+    border: none;
+    font-variant: small-caps;
+    letter-spacing: 0.5px;
 }
 
 .filter-panel label:hover {
-    background-color: #f8f9fa;
+    color: #2f1f0f;
 }
 
 .filter-checkbox {
-    margin-right: 10px;
-    cursor: pointer;
-    transform: scale(1.1);
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .filter-label {
     flex-grow: 1;
+    margin-right: 6px;
+}
+
+.category-count {
+    min-width: 32px;
+    padding: 2px 6px;
+    margin-left: 6px;
+    border-radius: 10px;
+    background: rgba(88,56,16,0.06);
+    border: 1px solid rgba(88,56,16,0.18);
+    color: #5a3c1f;
+    font-size: 12px;
+    text-align: right;
+}
+
+/* Активное/неактивное состояние категорий по чекбоксу */
+.filter-checkbox:checked ~ .filter-label {
+    color: #2f1f0f;
+}
+
+.filter-checkbox:checked ~ .category-count {
+    background: rgba(176,141,87,0.18);
+    border-color: rgba(176,141,87,0.45);
+}
+
+.filter-checkbox:not(:checked) ~ .filter-label,
+.filter-checkbox:not(:checked) ~ .category-count {
+    opacity: 0.7;
 }
 
 .filter-buttons {
     display: flex;
     gap: 8px;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .filter-button {
     flex: 1;
-    padding: 8px 12px;
-    background-color: #3388ff;
-    color: white;
+    padding: 10px 14px;
+    background-image: var(--btn-primary);
+    color: #f8f3e8;
     border: none;
-    border-radius: 5px;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 16px;
+    font-family: 'Helmswald', 'Uncial Antiqua', 'Ruslan Display', 'Cinzel', 'Inter', serif;
     transition: all 0.2s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 25px rgba(73, 44, 15, 0.28);
 }
 
 .filter-button:hover {
-    background-color: #2a7ae0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.25);
-    transform: translateY(-1px);
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 12px 30px rgba(73, 44, 15, 0.32);
 }
 
 .filter-button#hide-all {
-    background-color: #e74c3c;
+    background-image: var(--btn-danger);
+    color: #f8f3e8;
 }
 
 .filter-button#hide-all:hover {
-    background-color: #c0392b;
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 12px 30px rgba(124, 43, 32, 0.35);
 }
 
-/* Стиль для свернутой панели */
-.filter-panel.collapsed {
-    min-width: 40px;
-    width: 40px;
-    padding: 10px;
-    overflow: hidden;
+/* Отключаем анимации вложенных элементов только в свернутом состоянии, чтобы иконки не меняли размер */
+.filter-panel.collapsed * {
+    transition: none !important;
 }
 
-.filter-panel.collapsed .filter-content {
+/* Удаляем старые стили для кнопки сворачивания */
+.filter-collapse-control {
     display: none;
 }
 
-.filter-panel.collapsed .filter-header h3 {
+.collapse-panel-btn {
     display: none;
-}
-
-.filter-panel.collapsed .filter-controls {
-    flex-direction: column;
-    margin-left: 0;
-}
-
-.filter-panel.collapsed .filter-control-btn {
-    width: 100%;
-    margin-bottom: 5px;
-}
-
-.filter-panel.collapsed .filter-control-btn:last-child {
-    margin-bottom: 0;
-}
-
-/* Панель управления фильтрами */
-.filter-toggle-control {
-    margin-bottom: 10px;
 }
 
 #toggle-filter-panel-btn {
-    padding: 10px 15px;
-    background: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #7b542c 0%, #5a3c1f 60%, #8c6239 100%);
+    color: #f8f1e3;
+    border: 1.25px solid rgba(43, 26, 10, 0.55);
+    border-radius: 10px;
     cursor: pointer;
     font-size: 14px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
+    letter-spacing: 0.6px;
+    font-family: 'Kereru Bold Italic', 'Uncial Antiqua', 'Ruslan Display', 'Cinzel', 'Inter', serif;
+    box-shadow: 0 7px 16px rgba(43,26,10,0.32), inset 0 1px 0 rgba(255,255,255,0.12);
+    transition: all 0.28s ease;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -193,9 +442,9 @@ body {
 }
 
 #toggle-filter-panel-btn:hover {
-    background: #2980b9;
+    filter: brightness(1.03);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 22px rgba(43,26,10,0.36), inset 0 1px 0 rgba(255,255,255,0.18);
 }
 
 .btn-icon {
@@ -205,7 +454,7 @@ body {
 /* Стили для отображения координат */
 .coord-display {
     font-family: 'Courier New', monospace;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .coord-display div {
@@ -218,34 +467,79 @@ body {
 
 /* Стили для всплывающих окон */
 .leaflet-popup-content {
-    min-width: 220px;
-    max-width: 300px;
-    padding: 5px;
+    min-width: 240px;
+    max-width: 340px;
+    padding: 0;
 }
 
 .popup-content h3 {
-    margin: 0 0 10px 0;
-    color: #2c3e50;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 5px;
-    font-size: 16px;
+    margin: 0 0 8px 0;
+    color: #2b1b0c;
+    border-bottom: 2px solid rgba(88,56,16,0.35);
+    padding-bottom: 6px;
+    font-size: 18px;
+    letter-spacing: 0.4px;
 }
 
 .popup-content p {
     margin: 10px 0;
-    line-height: 1.4;
-    color: #555;
-    font-size: 14px;
+    line-height: 1.5;
+    color: #3e2a16;
+    font-size: 15px;
 }
 
 .popup-content small {
-    color: #7f8c8d;
+    color: #5b4128;
     font-style: italic;
-    font-size: 12px;
+    font-size: 13px;
     display: block;
     margin-top: 8px;
     padding-top: 8px;
     border-top: 1px dashed #ddd;
+}
+
+.leaflet-popup-content-wrapper {
+    max-height: 400px;
+    overflow-y: auto;
+    background: linear-gradient(145deg, #f7e8cc 0%, #ead9b3 100%);
+    border: 1.5px solid rgba(88,56,16,0.35);
+    box-shadow: 0 14px 32px rgba(34, 19, 8, 0.35);
+    border-radius: 14px;
+}
+
+.leaflet-popup-tip {
+    background: linear-gradient(145deg, #f7e8cc 0%, #ead9b3 100%);
+    border: 1.5px solid rgba(88,56,16,0.35);
+}
+
+.popup-content {
+    padding: 14px 16px 12px;
+    position: relative;
+    font-family: 'Kereru Bold Italic', 'Uncial Antiqua', 'Ruslan Display', 'Cinzel', 'Inter', serif;
+}
+
+.popup-content::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px dashed rgba(88,56,16,0.25);
+    pointer-events: none;
+    border-radius: 10px;
+}
+
+.popup-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.popup-icon {
+    width: 28px;
+    height: 28px;
+    background: url('../assets/icons/castle.svg') center/80% no-repeat, rgba(0,0,0,0.05);
+    border: 1px solid rgba(88,56,16,0.2);
+    border-radius: 50%;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
 }
 
 /* Кнопки управления */
@@ -262,7 +556,7 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
     box-shadow: 0 1px 5px rgba(0,0,0,0.65);
 }
 
@@ -281,6 +575,19 @@ body {
         min-width: 35px;
         width: 35px;
         padding: 8px;
+    }
+    
+    .filter-toggle-left {
+        left: -42px;
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+    
+    .filter-panel.collapsed .filter-toggle-left {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
     }
     
     .filter-header h3 {
