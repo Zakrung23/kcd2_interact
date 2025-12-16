@@ -3,10 +3,45 @@
 
 ## В данной версии карты представлена локация Кутна-Гора.
 - Лагеря
-- Поселения
+  
+  <img width="25" height="41" alt="swords-marker" src="https://github.com/user-attachments/assets/de9673dd-21e8-488d-8c1c-b61943ed7252" />
+  
+  
+- Населенные пункты
+  
+  <img width="25" height="41" alt="house-marker" src="https://github.com/user-attachments/assets/06c08423-89a5-413a-8d63-eb87ffa30a9b" />
+
+  
 - Основные ( main ) квесты
+
+<img width="25" height="41" alt="main-quest" src="https://github.com/user-attachments/assets/40d4411f-0838-409a-b9be-f6013454eeae" />
+
+  
 - Побочные квесты
+
+<img width="25" height="41" alt="side-quest" src="https://github.com/user-attachments/assets/ad574251-34d5-4cd9-9573-7e2f14ae87c0" />
+
+
 - Просьбы от NPC
+
+<img width="25" height="41" alt="begging" src="https://github.com/user-attachments/assets/a7faa4cb-c1da-49cf-98c1-4a866d33ba4d" />
+
+  
+- Таверны
+
+<img width="25" height="41" alt="taverna" src="https://github.com/user-attachments/assets/040cfe3a-d7f8-49ed-a21e-4d91a69e6854" />
+
+
+- Кузницы
+
+<img width="25" height="41" alt="blacksmithm" src="https://github.com/user-attachments/assets/2bcfcd06-1275-4bf0-81d6-ecca95fb840d" />
+
+
+- Мастерские бронника
+
+<img width="25" height="41" alt="armoury" src="https://github.com/user-attachments/assets/01ea6072-8423-4323-bdb3-097f10c0449e" />
+
+________________________________________________________________________________________________________________________________
 
 ## Основная функция - фильтрация маркерной системы
 
@@ -16,7 +51,8 @@
 
 Далее откроется данное меню
 
-<img width="430" height="820" alt="изображение" src="https://github.com/user-attachments/assets/059cac65-2f91-4b3a-a075-6f16baa515d5" />
+<img width="339" height="850" alt="изображение" src="https://github.com/user-attachments/assets/0d4d6e23-b00f-4692-a0ef-8879b1ad59dd" />
+
 
 Для скрытия/появления маркеров нужно нажать на название маркера
 
