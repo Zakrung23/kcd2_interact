@@ -34,11 +34,11 @@ const markers = {
 
 // Иконки для каждой категории
 const categoryIcons = {
-    'Лагеря': 'assets/icons/swords.svg',
-    'Поселения': 'assets/icons/castle.svg',
-    'Основные квесты': 'assets/icons/main_quest.png',
-    'Побочные квесты': 'assets/icons/side_quest.png',
-    'Просьбы': 'assets/icons/request.png',
+    'Лагеря': 'assets/icons/swords-marker.png',
+    'Поселения': 'assets/icons/house-marker.png',
+    'Основные квесты': 'assets/icons/main-quest.png',
+    'Побочные квесты': 'assets/icons/side-quest.png',
+    'Просьбы': 'assets/icons/begging.png',
     'default': 'assets/icons/default.png'
 };
 
@@ -56,7 +56,7 @@ function addMarker(pixelX, pixelY, title, description, category, customIconUrl =
     
     const icon = L.icon({
         iconUrl: iconUrl,
-        iconSize: [32, 32],
+        iconSize: [30, 38],
         iconAnchor: [16, 32],
         popupAnchor: [0, -32]
     });
@@ -132,55 +132,65 @@ function createFilterPanel() {
     filterPanelControl = L.control({ position: 'topright' });
     
     filterPanelControl.onAdd = function(map) {
-        const div = L.DomUtil.create('div', 'filter-panel');
-        div.innerHTML = `
-            <!-- Кнопка свернуть/развернуть теперь в левой части -->
-            <div class="filter-toggle-left" title="Свернуть/Развернуть панель"></div>
-            
-            <div class="filter-content-wrapper">
-                <div class="filter-logo">
-                    <div class="logo-emblem"></div>
-                </div>
-                <div class="filter-subtitle-main">Интерактивная карта Kingdom Come Deliverance 2</div>
-                <div class="filter-header">
-                    <h3>Фильтры маркеров</h3>
-                </div>
-                <div class="filter-content">
-                    <div class="filter-list">
-                        <label>
-                            <input type="checkbox" class="filter-checkbox" value="Лагеря" checked>
-                            <span class="filter-label">🏕️ Лагеря</span>
-                            <span class="category-count" data-category="Лагеря">0</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" class="filter-checkbox" value="Поселения" checked>
-                            <span class="filter-label">🏘️ Поселения</span>
-                            <span class="category-count" data-category="Поселения">0</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" class="filter-checkbox" value="Основные квесты" checked>
-                            <span class="filter-label">⚔️ Основные квесты</span>
-                            <span class="category-count" data-category="Основные квесты">0</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" class="filter-checkbox" value="Побочные квесты" checked>
-                            <span class="filter-label">📜 Побочные квесты</span>
-                            <span class="category-count" data-category="Побочные квесты">0</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" class="filter-checkbox" value="Просьбы" checked>
-                            <span class="filter-label">🙏 Просьбы</span>
-                            <span class="category-count" data-category="Просьбы">0</span>
-                        </label>
-                    </div>
-                    <div class="filter-buttons">
-                        <button class="filter-button" id="show-all">Показать все</button>
-                        <button class="filter-button" id="hide-all">Скрыть все</button>
-                    </div>
-                </div>
-                <div class="filter-footer-powered">Powered by Bolvany</div>
+    const div = L.DomUtil.create('div', 'filter-panel');
+    div.innerHTML = `
+        <!-- Кнопка свернуть/развернуть теперь в левой части -->
+        <div class="filter-toggle-left" title="Свернуть/Развернуть панель"></div>
+        
+        <div class="filter-content-wrapper">
+            <div class="filter-logo">
+                <div class="logo-emblem"></div>
             </div>
-        `;
+            <div class="filter-subtitle-main">Интерактивная карта Kingdom Come Deliverance 2</div>
+            <div class="filter-header">
+                <h3>Фильтры маркеров</h3>
+            </div>
+            <div class="filter-content">
+                <div class="filter-list">
+                    <label>
+                        <input type="checkbox" class="filter-checkbox" value="Лагеря" checked>
+                        <span class="filter-label">
+                            <img src="assets/icons/sword.png" alt="Лагеря" class="filter-icon"> Лагеря
+                        </span>
+                        <span class="category-count" data-category="Лагеря">0</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" class="filter-checkbox" value="Поселения" checked>
+                        <span class="filter-label">
+                            <img src="assets/icons/home.png" alt="Поселения" class="filter-icon"> Поселения
+                        </span>
+                        <span class="category-count" data-category="Поселения">0</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" class="filter-checkbox" value="Основные квесты" checked>
+                        <span class="filter-label">
+                            <img src="assets/icons/danger.png" alt="Основные квесты" class="filter-icon"> Основные квесты
+                        </span>
+                        <span class="category-count" data-category="Основные квесты">0</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" class="filter-checkbox" value="Побочные квесты" checked>
+                        <span class="filter-label">
+                            <img src="assets/icons/question.png" alt="Побочные квесты" class="filter-icon"> Побочные квесты
+                        </span>
+                        <span class="category-count" data-category="Побочные квесты">0</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" class="filter-checkbox" value="Просьбы" checked>
+                        <span class="filter-label">
+                            <img src="assets/icons/palm.png" alt="Просьбы" class="filter-icon"> Просьбы
+                        </span>
+                        <span class="category-count" data-category="Просьбы">0</span>
+                    </label>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-button" id="show-all">Показать все</button>
+                    <button class="filter-button" id="hide-all">Скрыть все</button>
+                </div>
+            </div>
+            <div class="filter-footer-powered">Powered by Bolvany</div>
+        </div>
+    `;
         
         // Добавляем обработчики событий для чекбоксов
         const checkboxes = div.querySelectorAll('.filter-checkbox');
