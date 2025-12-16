@@ -80,6 +80,4 @@
 </p>
 
 Приятного пользования!
-<p align = "center" width = 100%>
 ![xpyzpuegqii01](https://github.com/user-attachments/assets/70642b32-e48a-454a-bb56-f7ff8d75c4be)
-</p>
