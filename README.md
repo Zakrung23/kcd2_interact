@@ -10,4 +10,18 @@
 
 ## Основная функция - фильтрация маркерной системы
 
-<img width="103" height="95" alt="изображение" src="https://github.com/user-attachments/assets/2157dcf1-2051-44c6-b178-769de2541959" />
+Для открытия панели паркеров нужно нажать на данную кнопку
+
+<img width="82" height="81" alt="изображение" src="https://github.com/user-attachments/assets/f3a34477-103c-4aaa-854e-abf413ee5b18" />
+
+Далее откроется данное меню
+
+<img width="430" height="820" alt="изображение" src="https://github.com/user-attachments/assets/059cac65-2f91-4b3a-a075-6f16baa515d5" />
+
+Для скрытия/появления маркеров нужно нажать на название маркера
+
+Чтобы свернуть меню нужно нажать на данную кнопку с правой стороны меню
+
+<img width="58" height="60" alt="изображение" src="https://github.com/user-attachments/assets/74077de1-d1c9-4a28-ac93-279912923325" />
+
+Приятного пользования!
