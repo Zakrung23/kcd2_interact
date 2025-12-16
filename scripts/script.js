@@ -30,9 +30,9 @@ const markers = {
     'Основные квесты': [],
     'Побочные квесты': [],
     'Просьбы': [],
-    'Оружейные лавки': [],
+    'Мастерские бронника': [],
     'Кузницы': [],
-    'Тавереы': []
+    'Таверны': []
 };
 
 // Иконки для каждой категории
@@ -42,7 +42,10 @@ const categoryIcons = {
     'Основные квесты': 'assets/icons/main-quest.png',
     'Побочные квесты': 'assets/icons/side-quest.png',
     'Просьбы': 'assets/icons/begging.png',
-    'default': 'assets/icons/default.png'
+    'Таверны': 'assets/icons/taverna.png',
+    'Кузницы': 'assets/icons/blacksmithm.png',
+    'Мастерские бронника': 'assets/icons/armoury.png',
+    'default': 'assets/icons/шаблон-маркер.png'
 };
 
 // Переменные для управления панелью фильтров
@@ -188,23 +191,23 @@ function createFilterPanel() {
                     <label>
                         <input type="checkbox" class="filter-checkbox" value="Таверны" checked>
                         <span class="filter-label">
-                            <img src="assets/icons/palm.png" alt="Таверны" class="filter-icon"> Таверны
+                            <img src="assets/icons/beer.png" alt="Таверны" class="filter-icon"> Таверны
                         </span>
                         <span class="category-count" data-category="Таверны">0</span>
                     </label>
                     <label>
                         <input type="checkbox" class="filter-checkbox" value="Кузницы" checked>
                         <span class="filter-label">
-                            <img src="assets/icons/palm.png" alt="Кузницы" class="filter-icon"> Кузницы
+                            <img src="assets/icons/blacksmith.png" alt="Кузницы" class="filter-icon"> Кузницы
                         </span>
                         <span class="category-count" data-category="Кузницы">0</span>
                     </label>
                     <label>
-                        <input type="checkbox" class="filter-checkbox" value="Оружейная лавка" checked>
+                        <input type="checkbox" class="filter-checkbox" value="Мастерские бронника" checked>
                         <span class="filter-label">
-                            <img src="assets/icons/palm.png" alt="Оружейные лавки" class="filter-icon"> Оружейные лавки
+                            <img src="assets/icons/shield.png" alt="Мастерские бронника" class="filter-icon"> Мастерские бронника
                         </span>
-                        <span class="category-count" data-category="Оружейные лавки">0</span>
+                        <span class="category-count" data-category="Мастерские бронника">0</span>
                     </label>
                 </div>
                 <div class="filter-buttons">
@@ -382,7 +385,7 @@ function updateCategoryCounts() {
 addMarker(4459, 3694, "Лагерь Сигизмунда", "Военный лагерь короля Сигизмунда под Куттенбергом", "Лагеря");
 
 // Поселения
-addMarker(9670, 4462, "Куттенберг", "Столица Богемии, также называемая столицей серебряных рудников", "Поселения");
+addMarker(9670, 4462, "Кутна-Гора", "Центральный город, также называемый столицей серебряных рудников", "Поселения");
 addMarker(2144, 4466, "Сухдол", "Поселение с небольшой крепостью на западе карты", "Поселения");
 addMarker(2818, 2142, "Раборш", "Небольшая деревня с крепостью", "Поселения");
 addMarker(3978, 2098, "Богуновиц", "Небольшая деревня", "Поселения");
@@ -401,6 +404,9 @@ addMarker(2246, 4080, "Пером и мечом", "Доложить Маркгр
 addMarker(2244, 4130, "Последние обряды", "Отразить атаку на крепость", "Основные квесты");
 addMarker(6109, 1495, "Чертова стая", "Привести членов банды Черта в Логово черта", "Основные квесты");
 addMarker(6131, 1486, "В подземелье", "Узнать информацию о Лихтенштейне от Катерины", "Основные квесты");
+
+// Мастерские бронника
+addMarker(9400,4400, 'Мастерская бронника','Магазин брони на въезде в Кутна-Гору','Мастерские бронника')
 
 // Функция для быстрого добавления маркера
 function addMarkers(pixelX, pixelY, title, description, iconUrl = null) {
