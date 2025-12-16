@@ -8,39 +8,39 @@
   </p>
   
 - Населенные пункты
-  
-  <img width="25" height="41" alt="house-marker" src="https://github.com/user-attachments/assets/06c08423-89a5-413a-8d63-eb87ffa30a9b" />
-
+<p align = "center" width = 100%>
+      <img width="25" height="41" alt="house-marker" src="https://github.com/user-attachments/assets/06c08423-89a5-413a-8d63-eb87ffa30a9b" />
+</p>
   
 - Основные ( main ) квесты
-
-<img width="25" height="41" alt="main-quest" src="https://github.com/user-attachments/assets/40d4411f-0838-409a-b9be-f6013454eeae" />
-
+<p align = "center" width = 100%>
+      <img width="25" height="41" alt="main-quest" src="https://github.com/user-attachments/assets/40d4411f-0838-409a-b9be-f6013454eeae" />
+</p>
   
 - Побочные квесты
-
-<img width="25" height="41" alt="side-quest" src="https://github.com/user-attachments/assets/ad574251-34d5-4cd9-9573-7e2f14ae87c0" />
-
+<p aligh = 'center' width = 100%>
+      <img width="25" height="41" alt="side-quest" src="https://github.com/user-attachments/assets/ad574251-34d5-4cd9-9573-7e2f14ae87c0" />
+</p>
 
 - Просьбы от NPC
-
-<img width="25" height="41" alt="begging" src="https://github.com/user-attachments/assets/a7faa4cb-c1da-49cf-98c1-4a866d33ba4d" />
-
+<p aligh = 'center' width = 100%>
+      <img width="25" height="41" alt="begging" src="https://github.com/user-attachments/assets/a7faa4cb-c1da-49cf-98c1-4a866d33ba4d" />
+</p>
   
 - Таверны
-
-<img width="25" height="41" alt="taverna" src="https://github.com/user-attachments/assets/040cfe3a-d7f8-49ed-a21e-4d91a69e6854" />
-
+<p aligh = 'center' width = 100%>
+      <img width="25" height="41" alt="taverna" src="https://github.com/user-attachments/assets/040cfe3a-d7f8-49ed-a21e-4d91a69e6854" />
+</p>
 
 - Кузницы
-
-<img width="25" height="41" alt="blacksmithm" src="https://github.com/user-attachments/assets/2bcfcd06-1275-4bf0-81d6-ecca95fb840d" />
-
+<p aligh = 'center' width = 100%>
+      <img width="25" height="41" alt="blacksmithm" src="https://github.com/user-attachments/assets/2bcfcd06-1275-4bf0-81d6-ecca95fb840d" />
+</p>
 
 - Мастерские бронника
-
-<img width="25" height="41" alt="armoury" src="https://github.com/user-attachments/assets/01ea6072-8423-4323-bdb3-097f10c0449e" />
-
+<p aligh = 'center' width = 100%>
+      <img width="25" height="41" alt="armoury" src="https://github.com/user-attachments/assets/01ea6072-8423-4323-bdb3-097f10c0449e" />
+</p>
 ________________________________________________________________________________________________________________________________
 
 ## Основная функция - фильтрация маркерной системы
