@@ -3,7 +3,7 @@
 
 ## В данной версии карты представлена локация Кутна-Гора.
 - Лагеря
-  <p align = "center" width = 100%
+  <p align = "center" width = 100%>
       <img width="25" height="41" alt="swords-marker" src="https://github.com/user-attachments/assets/de9673dd-21e8-488d-8c1c-b61943ed7252" />
   </p>
   
