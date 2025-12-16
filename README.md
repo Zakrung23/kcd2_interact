@@ -2,14 +2,15 @@
 ![Alt text](https://press.warhorsestudios.cz/uploads/KCD_2_Logo_Render_01_STG_13v1_9836a817ed.jpg)
 
 ## В данной версии карты представлена локация Кутна-Гора.
+________________________________________________________________________________________________________________________________
 
 <p align = "center" width = 100%>
-Лагеря
+Лагеря\
 <img width="25" height="41" alt="swords-marker" src="https://github.com/user-attachments/assets/de9673dd-21e8-488d-8c1c-b61943ed7252" />
 </p>
   
 <p align = "center" width = 100%>
-Населенные пункты
+Населенные пункты\
 <img width="25" height="41" alt="house-marker" src="https://github.com/user-attachments/assets/06c08423-89a5-413a-8d63-eb87ffa30a9b" />
 </p>
   
