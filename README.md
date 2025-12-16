@@ -5,47 +5,55 @@
 ________________________________________________________________________________________________________________________________
 
 <p align = "center" width = 100%>
-Лагеря<br> 
+Лагеря<br>
+  <br>
 <img width="25" height="41" alt="swords-marker" src="https://github.com/user-attachments/assets/de9673dd-21e8-488d-8c1c-b61943ed7252" />
 </p>
   
 <p align = "center" width = 100%>
-Населенные пункты  
+Населенные пункты<br>
+  <br>
 <img width="25" height="41" alt="house-marker" src="https://github.com/user-attachments/assets/06c08423-89a5-413a-8d63-eb87ffa30a9b" />
 </p>
   
 
 <p align = "center" width = 100%>
-Основные ( main ) квесты  
+Основные ( main ) квесты  <br>
+  <br>
 <img width="25" height="41" alt="main-quest" src="https://github.com/user-attachments/assets/40d4411f-0838-409a-b9be-f6013454eeae" />
 </p>
 
 
 <p align = "center" width = 100%>
-Побочные квесты  
+Побочные квесты  <br>
+  <br>
 <img width="25" height="41" alt="side-quest" src="https://github.com/user-attachments/assets/ad574251-34d5-4cd9-9573-7e2f14ae87c0" />
 </p>
 
 
 <p align = "center" width = 100%>
-Просьбы от NPC  
+Просьбы от NPC  <br>
+  <br>
 <img width="25" height="41" alt="begging" src="https://github.com/user-attachments/assets/a7faa4cb-c1da-49cf-98c1-4a866d33ba4d" />
 </p>
   
 
 <p align = "center" width = 100%>
-Таверны  
+Таверны  <br>
+  <br>
 <img width="25" height="41" alt="taverna" src="https://github.com/user-attachments/assets/040cfe3a-d7f8-49ed-a21e-4d91a69e6854" />
 </p>
 
 
 <p align = "center" width = 100%>
-Кузницы  
+Кузницы  <br>
+  <br>
 <img width="25" height="41" alt="blacksmithm" src="https://github.com/user-attachments/assets/2bcfcd06-1275-4bf0-81d6-ecca95fb840d" />
 </p>
 
 <p align = "center" width = 100%>
-Мастерские бронника  
+Мастерские бронника  <br>
+  <br>
 <img width="25" height="41" alt="armoury" src="https://github.com/user-attachments/assets/01ea6072-8423-4323-bdb3-097f10c0449e" />
 </p>
 ________________________________________________________________________________________________________________________________
