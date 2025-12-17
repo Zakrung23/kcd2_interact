@@ -1,6 +1,5 @@
-<p align = "center" width = 100%>
 #Интерактивная карта для Kingdom Come Deliverance 2
-</p>
+
 <img width="1280" height="869" alt="logo" src="https://github.com/user-attachments/assets/3dbb9b87-df8a-4c99-9ffb-fbedbc841e78" />
 
 
@@ -66,13 +65,13 @@
 Для открытия панели маркеров нужно нажать на данную кнопку
 
 <p align = "center" width = 100%>
-<img width="82" height="81" alt="изображение" src="https://github.com/user-attachments/assets/f3a34477-103c-4aaa-854e-abf413ee5b18" />
+<img width="69" height="66" alt="изображение" src="https://github.com/user-attachments/assets/c0a748c6-0b40-4d2a-9f94-c0964847c59f" />
 </p>
 
 Далее откроется данное меню
 
 <p align = "center" width = 100%>
-<img width="339" height="850" alt="изображение" src="https://github.com/user-attachments/assets/0d4d6e23-b00f-4692-a0ef-8879b1ad59dd" />
+<img width="342" height="841" alt="изображение" src="https://github.com/user-attachments/assets/d270d079-5bd8-400e-a4b0-3e6ca1c01034" />
 </p>
 
 Для скрытия/появления маркеров нужно нажать на название маркера
@@ -80,7 +79,7 @@
 Чтобы свернуть меню нужно нажать на данную кнопку с правой стороны меню
 
 <p align = "center" width = 100%>
-<img width="58" height="60" alt="изображение" src="https://github.com/user-attachments/assets/74077de1-d1c9-4a28-ac93-279912923325" />
+<img width="48" height="56" alt="изображение" src="https://github.com/user-attachments/assets/e8dfb5ad-0d3a-4bdf-a3d2-95063b74beb6" />
 </p>
 
 Приятного пользования!
