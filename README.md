@@ -1,4 +1,6 @@
-# 🗺️Интерактивная карта для Kingdom Come Deliverance 2🗺️
+<p align = "center" width = 100%>
+Интерактивная карта для Kingdom Come Deliverance 2
+</p>
 <img width="1280" height="869" alt="logo" src="https://github.com/user-attachments/assets/3dbb9b87-df8a-4c99-9ffb-fbedbc841e78" />
 
 
