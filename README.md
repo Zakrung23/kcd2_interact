@@ -1,5 +1,7 @@
 # 🗺️Интерактивная карта для Kingdom Come Deliverance 2🗺️
-![Alt text](https://press.warhorsestudios.cz/uploads/KCD_2_Logo_Render_01_STG_13v1_9836a817ed.jpg)
+<img width="1280" height="869" alt="logo" src="https://github.com/user-attachments/assets/3dbb9b87-df8a-4c99-9ffb-fbedbc841e78" />
+
+
 
 ## В данной версии карты представлена локация Кутна-Гора.
 <hr>
