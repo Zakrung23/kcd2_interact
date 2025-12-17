@@ -2,7 +2,8 @@
 const map = L.map('map', {
     minZoom: -1,
     maxZoom: 3,
-    crs: L.CRS.Simple
+    crs: L.CRS.Simple,
+    attributionControl:false
 });
 
 // размеры изображения
@@ -315,32 +316,34 @@ function updateFilterPanelAppearance() {
         collapseFilterPanel();
     }
 }
-
+// <<<<<<<<<< ЭТА ФИЧА ТОЛЬКО ДЛЯ РАЗРАБОТКИ МАРКЕРОВ >>>>>>>>>>>>>>
 // Инициализация отображения координат
-const coordDisplay = L.control({ position: 'bottomleft' });
+// const coordDisplay = L.control({ position: 'bottomleft' });
 
-coordDisplay.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'coord-display');
-    this.update([0, 0]);
-    return this._div;
-};
+// coordDisplay.onAdd = function (map) {
+//     this._div = L.DomUtil.create('div', 'coord-display');
+//     this.update([0, 0]);
+//     return this._div;
+// };
 
-coordDisplay.update = function (coords) {
-    this._div.innerHTML = `
-        <div>
-            <strong>X: ${coords[0]} | Y: ${coords[1]}</strong>
-        </div>
-    `;
-};
+// coordDisplay.update = function (coords) {
+//     this._div.innerHTML = `
+//         <div>
+//             <strong>X: ${coords[0]} | Y: ${coords[1]}</strong>
+//         </div>
+//     `;
+// };
 
-coordDisplay.addTo(map);
+// coordDisplay.addTo(map);
 
-map.on('mousemove', function (e) {
-    const pixelCoords = map.project(e.latlng, map.getMaxZoom() - 1);
-    const x = Math.round(pixelCoords.x);
-    const y = Math.round(pixelCoords.y);
-    coordDisplay.update([x, y]);
-});
+// map.on('mousemove', function (e) {
+//     const pixelCoords = map.project(e.latlng, map.getMaxZoom() - 1);
+//     const x = Math.round(pixelCoords.x);
+//     const y = Math.round(pixelCoords.y);
+//     coordDisplay.update([x, y]);
+// });
+
+// <<<<<<<<<< ЭТА ФИЧА ТОЛЬКО ДЛЯ РАЗРАБОТКИ МАРКЕРОВ >>>>>>>>>>>>>>
 
 // Загрузка сохраненного состояния панели
 function loadFilterPanelState() {
