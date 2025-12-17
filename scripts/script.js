@@ -154,11 +154,11 @@ function createFilterPanel() {
             <div class="filter-content">
                 <div class="filter-list">
                     <label>
-                        <input type="checkbox" class="filter-checkbox" value="Лагеря" checked>
+                        <input type="checkbox" class="filter-checkbox" value="Лагеря у дороги" checked>
                         <span class="filter-label">
-                            <img src="assets/icons/sword.png" alt="Лагеря" class="filter-icon"> Лагеря
+                            <img src="assets/icons/sword.png" alt="Лагеря у дороги" class="filter-icon"> Лагеря у дороги
                         </span>
-                        <span class="category-count" data-category="Лагеря">0</span>
+                        <span class="category-count" data-category="Лагеря у дороги">0</span>
                     </label>
                     <label>
                         <input type="checkbox" class="filter-checkbox" value="Поселения" checked>
