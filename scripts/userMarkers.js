@@ -1,54 +1,9 @@
-const USER_MARKERS_COOKIE_KEY = 'kcd2_user_markers';
 let userMarkers = [];
 let isAddingMarkerMode = false;
-const USER_MARKER_ICON = 'assets/icons/question.png';
+const USER_MARKER_ICON = 'assets/icons/cross.png';
 
 if (!markers['Мои метки']) {
     markers['Мои метки'] = [];
-}
-
-function saveUserMarkersToCookies() {
-    try {
-        const markerData = userMarkers.map(m => ({
-            pixelX: m.pixelX,
-            pixelY: m.pixelY,
-            title: m.title,
-            description: m.description,
-            id: m.id
-        }));
-        
-        const jsonData = JSON.stringify(markerData);
-        const date = new Date();
-        date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000));
-        const expires = "expires=" + date.toUTCString();
-        
-        document.cookie = USER_MARKERS_COOKIE_KEY + "=" + encodeURIComponent(jsonData) + ";" + expires + ";path=/";
-    } catch (error) {
-        console.error('Ошибка сохранения:', error);
-    }
-}
-
-function loadUserMarkersFromCookies() {
-    try {
-        const cookieValue = getCookie(USER_MARKERS_COOKIE_KEY);
-        if (cookieValue) {
-            const markerData = JSON.parse(decodeURIComponent(cookieValue));
-            markerData.forEach(data => addUserMarkerFromData(data));
-        }
-    } catch (error) {
-        console.error('Ошибка загрузки:', error);
-    }
-}
-
-function getCookie(name) {
-    const nameEQ = name + "=";
-    const ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null;
 }
 
 function addUserMarkerFromData(data) {
@@ -153,7 +108,6 @@ function saveNewMarker() {
     };
     
     addUserMarkerFromData(markerData);
-    saveUserMarkersToCookies();
     closeAddMarkerModal();
 }
 
@@ -209,7 +163,6 @@ function saveEditedMarker() {
     };
     
     addUserMarkerFromData(markerData);
-    saveUserMarkersToCookies();
     closeEditMarkerModal();
 }
 
@@ -236,8 +189,6 @@ function deleteUserMarker(markerId) {
     if (userIndex > -1) {
         userMarkers.splice(userIndex, 1);
     }
-    
-    saveUserMarkersToCookies();
     
     if (typeof updateCategoryCounts === 'function') {
         updateCategoryCounts();
@@ -333,7 +284,6 @@ function createModals() {
 document.addEventListener('DOMContentLoaded', function() {
     createAddMarkerButton();
     createModals();
-    loadUserMarkersFromCookies();
     map.on('click', addNewUserMarker);
 });
 
