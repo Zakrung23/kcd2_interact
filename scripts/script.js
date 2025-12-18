@@ -26,6 +26,7 @@ map.fitBounds(bounds);
 
 
 const markers = {
+    'Мои метки': [],
     'Лагеря у дороги': [],
     'Поселения': [],
     'Основные квесты': [],
@@ -38,6 +39,7 @@ const markers = {
 
 
 const categoryIcons = {
+    'Мои метки': 'assets/icons/шаблон-маркер.png',
     'Лагеря у дороги': 'assets/icons/swords-marker.png',
     'Поселения': 'assets/icons/house-marker.png',
     'Основные квесты': 'assets/icons/main-quest.png',
@@ -154,6 +156,13 @@ function createFilterPanel() {
             </div>
             <div class="filter-content">
                 <div class="filter-list">
+                    <label>
+                        <input type="checkbox" class="filter-checkbox" value="Мои метки" checked>
+                        <span class="filter-label">
+                            <img src="assets/icons/шаблон-маркер.png" alt="Мои метки" class="filter-icon"> Мои метки
+                        </span>
+                        <span class="category-count" data-category="Мои метки">0</span>
+                    </label>
                     <label>
                         <input type="checkbox" class="filter-checkbox" value="Лагеря у дороги" checked>
                         <span class="filter-label">
