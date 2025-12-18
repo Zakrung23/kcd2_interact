@@ -1,19 +1,7 @@
 const USER_MARKERS_COOKIE_KEY = 'kcd2_user_markers';
 let userMarkers = [];
 let isAddingMarkerMode = false;
-
-const userMarkerIcons = {
-    'default': 'assets/icons/шаблон-маркер.png',
-    'sword': 'assets/icons/sword.png',
-    'home': 'assets/icons/home.png',
-    'danger': 'assets/icons/danger.png',
-    'question': 'assets/icons/question.png',
-    'palm': 'assets/icons/palm.png',
-    'beer': 'assets/icons/beer.png',
-    'blacksmith': 'assets/icons/blacksmith.png',
-    'shield': 'assets/icons/shield.png',
-    'tent': 'assets/icons/tent.png'
-};
+const USER_MARKER_ICON = 'assets/icons/question.png';
 
 if (!markers['Мои метки']) {
     markers['Мои метки'] = [];
@@ -26,7 +14,6 @@ function saveUserMarkersToCookies() {
             pixelY: m.pixelY,
             title: m.title,
             description: m.description,
-            icon: m.icon,
             id: m.id
         }));
         
@@ -67,9 +54,8 @@ function getCookie(name) {
 function addUserMarkerFromData(data) {
     const coordinates = map.unproject([data.pixelX, data.pixelY], map.getMaxZoom() - 1);
     
-    const iconUrl = userMarkerIcons[data.icon] || userMarkerIcons['default'];
     const icon = L.icon({
-        iconUrl: iconUrl,
+        iconUrl: USER_MARKER_ICON,
         iconSize: [30, 38],
         iconAnchor: [16, 32],
         popupAnchor: [0, -32]
@@ -110,7 +96,6 @@ function addUserMarkerFromData(data) {
         pixelY: data.pixelY,
         title: data.title,
         description: data.description,
-        icon: data.icon,
         id: data.id
     };
     
@@ -140,7 +125,6 @@ function showAddMarkerModal(pixelX, pixelY) {
     
     document.getElementById('marker-title').value = '';
     document.getElementById('marker-description').value = '';
-    document.getElementById('marker-icon').value = 'default';
     
     modal.dataset.pixelX = pixelX;
     modal.dataset.pixelY = pixelY;
@@ -150,7 +134,6 @@ function saveNewMarker() {
     const modal = document.getElementById('add-marker-modal');
     const title = document.getElementById('marker-title').value.trim();
     const description = document.getElementById('marker-description').value.trim();
-    const icon = document.getElementById('marker-icon').value;
     
     if (!title) {
         alert('Введите название метки');
@@ -166,7 +149,6 @@ function saveNewMarker() {
         pixelY: pixelY,
         title: title,
         description: description || 'Моя метка',
-        icon: icon,
         id: id
     };
     
@@ -188,7 +170,6 @@ function editUserMarker(markerId) {
     
     document.getElementById('edit-marker-title').value = markerInfo.title;
     document.getElementById('edit-marker-description').value = markerInfo.description;
-    document.getElementById('edit-marker-icon').value = markerInfo.icon;
     
     modal.dataset.markerId = markerId;
 }
@@ -202,7 +183,6 @@ function saveEditedMarker() {
     
     const title = document.getElementById('edit-marker-title').value.trim();
     const description = document.getElementById('edit-marker-description').value.trim();
-    const icon = document.getElementById('edit-marker-icon').value;
     
     if (!title) {
         alert('Введите название метки');
@@ -225,7 +205,6 @@ function saveEditedMarker() {
         pixelY: markerInfo.pixelY,
         title: title,
         description: description,
-        icon: icon,
         id: markerId
     };
     
@@ -314,21 +293,6 @@ function createModals() {
                         <label for="marker-description">Описание:</label>
                         <textarea id="marker-description" class="form-textarea" placeholder="Введите описание" rows="3" maxlength="200"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="marker-icon">Иконка:</label>
-                        <select id="marker-icon" class="form-select">
-                            <option value="default">По умолчанию</option>
-                            <option value="sword">Меч</option>
-                            <option value="home">Дом</option>
-                            <option value="danger">Опасность</option>
-                            <option value="question">Вопрос</option>
-                            <option value="palm">Просьба</option>
-                            <option value="beer">Таверна</option>
-                            <option value="blacksmith">Кузница</option>
-                            <option value="shield">Щит</option>
-                            <option value="tent">Лагерь</option>
-                        </select>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="modal-btn cancel-btn" onclick="closeAddMarkerModal()">Отмена</button>
@@ -351,21 +315,6 @@ function createModals() {
                     <div class="form-group">
                         <label for="edit-marker-description">Описание:</label>
                         <textarea id="edit-marker-description" class="form-textarea" placeholder="Введите описание" rows="3" maxlength="200"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-marker-icon">Иконка:</label>
-                        <select id="edit-marker-icon" class="form-select">
-                            <option value="default">По умолчанию</option>
-                            <option value="sword">Меч</option>
-                            <option value="home">Дом</option>
-                            <option value="danger">Опасность</option>
-                            <option value="question">Вопрос</option>
-                            <option value="palm">Просьба</option>
-                            <option value="beer">Таверна</option>
-                            <option value="blacksmith">Кузница</option>
-                            <option value="shield">Щит</option>
-                            <option value="tent">Лагерь</option>
-                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
