@@ -39,7 +39,7 @@ const markers = {
 
 
 const categoryIcons = {
-    'Мои метки': 'assets/icons/шаблон-маркер.png',
+    'Мои метки': 'assets/icons/self.png',
     'Лагеря у дороги': 'assets/icons/swords-marker.png',
     'Поселения': 'assets/icons/house-marker.png',
     'Основные квесты': 'assets/icons/main-quest.png',
@@ -159,7 +159,7 @@ function createFilterPanel() {
                     <label>
                         <input type="checkbox" class="filter-checkbox" value="Мои метки" checked>
                         <span class="filter-label">
-                            <img src="assets/icons/шаблон-маркер.png" alt="Мои метки" class="filter-icon"> Мои метки
+                            <img src="assets/icons/pencil.png" alt="Мои метки" class="filter-icon"> Мои метки
                         </span>
                         <span class="category-count" data-category="Мои метки">0</span>
                     </label>

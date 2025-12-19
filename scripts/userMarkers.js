@@ -1,9 +1,57 @@
 let userMarkers = [];
 let isAddingMarkerMode = false;
-const USER_MARKER_ICON = 'assets/icons/cross.png';
+const USER_MARKER_ICON = 'assets/icons/self.png';
+const STORAGE_KEY = 'kcd2_user_markers';
 
+// Инициализация категории "Мои метки"
 if (!markers['Мои метки']) {
     markers['Мои метки'] = [];
+}
+
+// Загрузка меток из Local Storage
+function loadUserMarkersFromStorage() {
+    try {
+        const storedMarkers = localStorage.getItem(STORAGE_KEY);
+        if (storedMarkers) {
+            const markersData = JSON.parse(storedMarkers);
+            markersData.forEach(markerData => {
+                addUserMarkerFromData(markerData);
+            });
+            console.log(`Загружено ${markersData.length} пользовательских меток из Local Storage`);
+        }
+    } catch (error) {
+        console.error('Ошибка при загрузке меток из Local Storage:', error);
+        // Если есть ошибка, очищаем хранилище
+        localStorage.removeItem(STORAGE_KEY);
+    }
+}
+
+// Сохранение меток в Local Storage
+function saveUserMarkersToStorage() {
+    try {
+        const markersToSave = userMarkers.map(markerInfo => ({
+            pixelX: markerInfo.pixelX,
+            pixelY: markerInfo.pixelY,
+            title: markerInfo.title,
+            description: markerInfo.description,
+            id: markerInfo.id
+        }));
+        
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(markersToSave));
+        console.log(`Сохранено ${markersToSave.length} пользовательских меток в Local Storage`);
+    } catch (error) {
+        console.error('Ошибка при сохранении меток в Local Storage:', error);
+    }
+}
+
+// Очистка всех пользовательских меток из хранилища
+function clearUserMarkersStorage() {
+    try {
+        localStorage.removeItem(STORAGE_KEY);
+        console.log('Все пользовательские метки удалены из Local Storage');
+    } catch (error) {
+        console.error('Ошибка при очистке Local Storage:', error);
+    }
 }
 
 function addUserMarkerFromData(data) {
@@ -57,9 +105,14 @@ function addUserMarkerFromData(data) {
     userMarkers.push(markerInfo);
     markers['Мои метки'].push(marker);
     
+    // Сохраняем изменения в Local Storage
+    saveUserMarkersToStorage();
+    
     if (typeof updateCategoryCounts === 'function') {
         updateCategoryCounts();
     }
+    
+    return markerInfo;
 }
 
 function addNewUserMarker(e) {
@@ -143,6 +196,7 @@ function saveEditedMarker() {
         return;
     }
     
+    // Удаляем старую метку
     map.removeLayer(markerInfo.marker);
     const index = markers['Мои метки'].indexOf(markerInfo.marker);
     if (index > -1) {
@@ -154,6 +208,7 @@ function saveEditedMarker() {
         userMarkers.splice(userIndex, 1);
     }
     
+    // Создаем обновленную метку
     const markerData = {
         pixelX: markerInfo.pixelX,
         pixelY: markerInfo.pixelY,
@@ -178,21 +233,52 @@ function deleteUserMarker(markerId) {
     const markerInfo = userMarkers.find(m => m.id === markerId);
     if (!markerInfo) return;
     
+    // Удаляем с карты
     map.removeLayer(markerInfo.marker);
     
+    // Удаляем из категории
     const index = markers['Мои метки'].indexOf(markerInfo.marker);
     if (index > -1) {
         markers['Мои метки'].splice(index, 1);
     }
     
+    // Удаляем из массива пользовательских меток
     const userIndex = userMarkers.findIndex(m => m.id === markerId);
     if (userIndex > -1) {
         userMarkers.splice(userIndex, 1);
     }
     
+    // Сохраняем изменения в Local Storage
+    saveUserMarkersToStorage();
+    
     if (typeof updateCategoryCounts === 'function') {
         updateCategoryCounts();
     }
+}
+
+// Функция для удаления всех пользовательских меток
+function deleteAllUserMarkers() {
+    if (!confirm('Удалить все ваши метки? Это действие нельзя отменить.')) {
+        return;
+    }
+    
+    // Удаляем все метки с карты
+    markers['Мои метки'].forEach(marker => {
+        map.removeLayer(marker);
+    });
+    
+    // Очищаем массивы
+    userMarkers = [];
+    markers['Мои метки'] = [];
+    
+    // Очищаем Local Storage
+    clearUserMarkersStorage();
+    
+    if (typeof updateCategoryCounts === 'function') {
+        updateCategoryCounts();
+    }
+    
+    alert('Все пользовательские метки удалены');
 }
 
 function toggleAddMarkerMode() {
@@ -219,12 +305,40 @@ function createAddMarkerButton() {
     
     addMarkerControl.onAdd = function(map) {
         const div = L.DomUtil.create('div', 'add-marker-control');
-        div.innerHTML = '<button id="add-marker-btn" class="add-marker-btn" onclick="toggleAddMarkerMode()">📍 Добавить метку</button>';
+        div.innerHTML = `
+            <button id="add-marker-btn" class="add-marker-btn" onclick="toggleAddMarkerMode()">
+                📍 Добавить метку
+            </button>
+            ${userMarkers.length > 0 ? `
+            <button id="clear-marker-btn" class="add-marker-btn clear-btn" onclick="deleteAllUserMarkers()" title="Удалить все мои метки">
+                🗑️ Очистить все
+            </button>
+            ` : ''}
+        `;
         L.DomEvent.disableClickPropagation(div);
         return div;
     };
     
     addMarkerControl.addTo(map);
+}
+
+// Обновление кнопки очистки
+function updateClearButton() {
+    const controlDiv = document.querySelector('.add-marker-control');
+    if (controlDiv) {
+        const clearBtn = document.getElementById('clear-marker-btn');
+        if (userMarkers.length > 0 && !clearBtn) {
+            const newClearBtn = document.createElement('button');
+            newClearBtn.id = 'clear-marker-btn';
+            newClearBtn.className = 'add-marker-btn clear-btn';
+            newClearBtn.innerHTML = '🗑️ Очистить все';
+            newClearBtn.title = 'Удалить все мои метки';
+            newClearBtn.onclick = deleteAllUserMarkers;
+            controlDiv.appendChild(newClearBtn);
+        } else if (userMarkers.length === 0 && clearBtn) {
+            clearBtn.remove();
+        }
+    }
 }
 
 function createModals() {
@@ -282,11 +396,18 @@ function createModals() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Сначала загружаем метки из Local Storage
+    loadUserMarkersFromStorage();
+    
+    // Затем создаем UI элементы
     createAddMarkerButton();
     createModals();
+    
+    // Добавляем обработчик кликов на карту
     map.on('click', addNewUserMarker);
 });
 
+// Экспортируем функции в глобальную область видимости
 window.toggleAddMarkerMode = toggleAddMarkerMode;
 window.saveNewMarker = saveNewMarker;
 window.closeAddMarkerModal = closeAddMarkerModal;
@@ -294,3 +415,6 @@ window.editUserMarker = editUserMarker;
 window.saveEditedMarker = saveEditedMarker;
 window.closeEditMarkerModal = closeEditMarkerModal;
 window.deleteUserMarker = deleteUserMarker;
+window.deleteAllUserMarkers = deleteAllUserMarkers;
+window.saveUserMarkersToStorage = saveUserMarkersToStorage;
+window.loadUserMarkersFromStorage = loadUserMarkersFromStorage;
