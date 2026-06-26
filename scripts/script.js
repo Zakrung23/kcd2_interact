@@ -57,7 +57,7 @@ let isFilterPanelVisible = true;
 let filterPanelState = 'expanded'; // 'expanded', 'collapsed'
 
 // Функция для добавления маркера
-function addMarker(pixelX, pixelY, title, description, category, customIconUrl = null) {
+function addMarker(pixelX, pixelY, title, description, category, customIconUrl = null, questId = null) {
     const coordinates = map.unproject([pixelX, pixelY], map.getMaxZoom() - 1);
     
     // Определяем иконку
@@ -73,10 +73,16 @@ function addMarker(pixelX, pixelY, title, description, category, customIconUrl =
     const marker = L.marker(coordinates, { 
         icon: icon, 
         category: category,
-        title: title
-    })
-        .addTo(map)
-        .bindPopup(`
+        title: title,
+        questId: questId
+    }).addTo(map);
+
+    if (questId && typeof registerQuestMarker === 'function') {
+        registerQuestMarker(questId, marker, {
+            pixelX, pixelY, title, description, category
+        });
+    } else {
+        marker.bindPopup(`
             <div class="popup-content">
                 <div class="popup-title-row">
                     <div class="popup-icon"></div>
@@ -86,6 +92,7 @@ function addMarker(pixelX, pixelY, title, description, category, customIconUrl =
                 <small><em>Категория: ${category}</em></small>
             </div>
         `);
+    }
     
     // Сохраняем маркер в соответствующей категории
     if (markers[category]) {
@@ -385,7 +392,18 @@ function updateCategoryCounts() {
     countSpans.forEach(span => {
         const category = span.dataset.category;
         const count = markers[category] ? markers[category].length : 0;
-        span.textContent = count;
+
+        if (typeof isQuestCategory === 'function' && isQuestCategory(category)) {
+            const completed = markers[category].filter(m => {
+                return m.options.questId && typeof getQuestStatus === 'function'
+                    && getQuestStatus(m.options.questId) === 'completed';
+            }).length;
+            span.textContent = `${completed}/${count}`;
+            span.title = `Выполнено ${completed} из ${count}`;
+        } else {
+            span.textContent = count;
+            span.title = '';
+        }
     });
 }
 

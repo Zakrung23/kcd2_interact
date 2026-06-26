@@ -1031,3 +1031,281 @@ body {
         padding: 8px 12px;
     }
 }
+
+/* Трекер квестов */
+.leaflet-marker-icon.quest-completed {
+    filter: grayscale(0.85) opacity(0.5);
+}
+
+.leaflet-marker-icon.quest-active {
+    filter: drop-shadow(0 0 5px #e6a817) brightness(1.1);
+}
+
+.quest-status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    margin: 8px 0;
+    font-family: 'Inter', 'Arial', sans-serif;
+}
+
+.quest-status-not_started { background: rgba(88, 56, 16, 0.12); color: #5a3c1f; }
+.quest-status-active { background: rgba(230, 168, 23, 0.25); color: #8a6200; }
+.quest-status-completed { background: rgba(74, 157, 95, 0.25); color: #2d6b3e; }
+
+.quest-title-completed {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.quest-status-controls {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(88, 56, 16, 0.3);
+    flex-wrap: wrap;
+}
+
+.quest-status-btn {
+    flex: 1;
+    min-width: 70px;
+    padding: 5px 8px;
+    border: 1px solid rgba(88, 56, 16, 0.3);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.5);
+    color: #3d2a10;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'Inter', 'Arial', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.quest-status-btn:hover {
+    background: rgba(196, 154, 108, 0.3);
+}
+
+.quest-status-btn.active {
+    background: linear-gradient(135deg, #c49a6c 0%, #b27b44 100%);
+    color: #fff;
+    border-color: transparent;
+}
+
+.quest-status-btn.reset-btn {
+    flex: 0 0 100%;
+    margin-top: 2px;
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+/* Личный кабинет */
+.cabinet-control {
+    margin-top: 0;
+}
+
+.cabinet-btn {
+    margin-top: 0 !important;
+}
+
+.cabinet-modal-content {
+    max-width: 560px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.cabinet-body {
+    overflow-y: auto;
+    max-height: 65vh;
+    padding: 16px 24px;
+}
+
+.cabinet-overall {
+    margin-bottom: 16px;
+}
+
+.cabinet-overall-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #3d2a10;
+}
+
+.cabinet-percent {
+    font-size: 22px;
+    font-weight: bold;
+    color: #4a9d5f;
+}
+
+.cabinet-progress-track {
+    height: 10px;
+    background: rgba(88, 56, 16, 0.12);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cabinet-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4a9d5f, #6bbd7a);
+    border-radius: 8px;
+    transition: width 0.4s ease;
+    width: 0;
+}
+
+.cabinet-overall-track {
+    height: 14px;
+}
+
+.cabinet-summary {
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: #5a3c1f;
+    font-family: 'Inter', 'Arial', sans-serif;
+}
+
+.cabinet-category-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.cabinet-stat-item {
+    font-size: 13px;
+    color: #3d2a10;
+    font-family: 'Inter', 'Arial', sans-serif;
+}
+
+.cabinet-stat-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.cabinet-user-info {
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    font-size: 13px;
+    color: #5a3c1f;
+    margin-bottom: 14px;
+    font-family: 'Inter', 'Arial', sans-serif;
+}
+
+.cabinet-filters,
+.cabinet-category-filters {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.cabinet-filter-btn,
+.cabinet-category-btn {
+    padding: 5px 12px;
+    border: 1px solid rgba(88, 56, 16, 0.3);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.4);
+    color: #3d2a10;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'Inter', 'Arial', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.cabinet-filter-btn:hover,
+.cabinet-category-btn:hover {
+    background: rgba(196, 154, 108, 0.25);
+}
+
+.cabinet-filter-btn.active,
+.cabinet-category-btn.active {
+    background: linear-gradient(135deg, #c49a6c 0%, #b27b44 100%);
+    color: #fff;
+    border-color: transparent;
+}
+
+.cabinet-quest-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.cabinet-quest-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(88, 56, 16, 0.1);
+    transition: background 0.15s ease;
+}
+
+.cabinet-quest-item:hover {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.cabinet-quest-item.quest-status-completed {
+    opacity: 0.65;
+}
+
+.cabinet-quest-item.quest-status-completed .cabinet-quest-title {
+    text-decoration: line-through;
+}
+
+.cabinet-quest-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+}
+
+.cabinet-quest-title {
+    font-size: 14px;
+    color: #2f1f0f;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cabinet-quest-meta {
+    font-size: 11px;
+    color: #6b5332;
+    font-family: 'Inter', 'Arial', sans-serif;
+}
+
+.cabinet-goto-btn {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(196, 154, 108, 0.3);
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s ease;
+    margin-left: 8px;
+}
+
+.cabinet-goto-btn:hover {
+    background: rgba(196, 154, 108, 0.55);
+}
+
+.cabinet-empty {
+    text-align: center;
+    color: #6b5332;
+    font-size: 14px;
+    padding: 20px;
+    font-family: 'Inter', 'Arial', sans-serif;
+}
+
+.cabinet-footer {
+    flex-shrink: 0;
+}
